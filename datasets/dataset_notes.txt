@@ -1,0 +1,7 @@
+breast cancer wisconsin: large data set with all ordinal data points. This one does bring up a point about combining points to make more condensed rules. This is a generally good benchmark that our algorithm should be able to handle. There are 16 missing attribute values that need to be taken care of.
+
+car: relatively large data set with all categorical data points. Our algorithm should be able to deal with this rather well and shouldn't have any interval algebra needed.
+
+HTRU2: All continuous (ordinal) data points. The algorithm should struggle with this. It will be interesting if FOIL also struggles.
+
+Tic-Tac-Toe: All categorical data and is a small data set. This game is defined off of a set of rules, so an exact set of uses should be able to be derived. 
