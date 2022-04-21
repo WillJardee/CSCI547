@@ -45,6 +45,6 @@ if __name__ == '__main__':
     for each_vector in range(len(vector)):
         ruleMap.add_term(vector[each_vector])
 
-    print("end")
-    ruleMap.eigs()
-    print("end")
+    print("end map gen")
+    for i in ruleMap.eigs(): print(i)
+    print("end all")
