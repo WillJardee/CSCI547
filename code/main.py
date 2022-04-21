@@ -24,25 +24,25 @@ if __name__ == '__main__':
     # rules = tRule.get_rules(rf[0], [str(i) for i in list(range(27))], ['unacc', 'acc', 'good', 'vgood'])
     # for r in rules:
     #     print(r)
-    rule = tRule.tree_to_code2(rf[0])
     vector = []
-    for each_rule in range(len(rule)):
-        arr = -1*np.ones(21)
-        for i in rule[each_rule][:-1]:
-            arr[i[0]-1] = i[1]
-        temp = rule[each_rule][-1]
-        for i in range(len(temp[0])):
-            if temp[0][i] != 0:
-                temp[0][i] = 1
-            else:
-                temp[0][i] = -1
-        arr = np.append(arr, [temp])
-        vector.append(arr)
+    for each_tree in range(len(rf)):
+        rule = tRule.tree_to_code2(rf[each_tree])
+        for each_rule in range(len(rule)):
+            arr = -1*np.ones(21)
+            for i in rule[each_rule][:-1]:
+                arr[i[0]-1] = i[1]
+            temp = rule[each_rule][-1]
+            for i in range(len(temp[0])):
+                if temp[0][i] != 0:
+                    temp[0][i] = 1
+                else:
+                    temp[0][i] = -1
+            arr = np.append(arr, [temp])
+            vector.append(arr)
 
     ruleMap = RuleExtractor.LorentzMap(21, 4)
 
     for each_vector in range(len(vector)):
-        print(vector[each_vector])
         ruleMap.add_term(vector[each_vector])
 
     print("end")
