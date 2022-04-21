@@ -46,3 +46,5 @@ if __name__ == '__main__':
         ruleMap.add_term(vector[each_vector])
 
     print("end")
+    ruleMap.eigs()
+    print("end")
