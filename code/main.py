@@ -6,20 +6,39 @@ import numpy as np
 import TreeRuleExtractor as tRule
 
 
-def build_dataset(dataset):
-    dat = np.genfromtxt("../datasets/" + dataset + "/data.csv", delimiter=",", dtype=str)
-    X, y = dat[:, 0:-1], dat[:, -1]
-    enc = OneHotEncoder(handle_unknown='ignore')
-    x_hot = enc.fit_transform(X)
-    ency = OneHotEncoder(handle_unknown='ignore')
-    ency.fit(np.array(np.unique(y)).reshape(1,-1))
+class Dataset:
+    def __init__(self, dataset):
+        dat = np.genfromtxt("../datasets/" + dataset + "/data.csv", delimiter=",", dtype=str)
+        self.X, self.y = dat[:, 0:-1], dat[:, -1]
+        self.xenc = OneHotEncoder(handle_unknown='ignore')
+        self.x_hot = self.xenc.fit_transform(self.X)
+        self.yenc= OneHotEncoder(handle_unknown='ignore')
+        self.yenc.fit(np.array(np.unique(self.y)).reshape(1, -1))
+        self.classes = np.unique(self.y)
+        self.forest = None
+        self.build_forest()
 
-    rf = RandomForestClassifier(n_estimators=100, random_state=42)
-    return rf.fit(x_hot, y), ency, np.unique(y)
+    def build_forest(self):
+        f_classifier = RandomForestClassifier(n_estimators=100, random_state=42)
+        self.forest = f_classifier.fit(self.x_hot, self.y)
+
+
+
+# def build_dataset(dataset):
+#     dat = np.genfromtxt("../datasets/" + dataset + "/data.csv", delimiter=",", dtype=str)
+#     X, y = dat[:, 0:-1], dat[:, -1]
+#     enc = OneHotEncoder(handle_unknown='ignore')
+#     x_hot = enc.fit_transform(X)
+#     ency = OneHotEncoder(handle_unknown='ignore')
+#     ency.fit(np.array(np.unique(y)).reshape(1,-1))
+#
+#     rf = RandomForestClassifier(n_estimators=100, random_state=42)
+#     return rf.fit(x_hot, y), ency, np.unique(y)
 
 
 if __name__ == '__main__':
-    rf, ency, classes = build_dataset('car')
+    dataset = Dataset('car')
+    rf, ency, classes = dataset.forest, dataset.yenc, dataset.classes
     # tRule.tree_to_code(rf[0], [str(i) + "." for i in list(range(27))])
     # rules = tRule.get_rules(rf[0], [str(i) for i in list(range(27))], ['unacc', 'acc', 'good', 'vgood'])
     # for r in rules:
