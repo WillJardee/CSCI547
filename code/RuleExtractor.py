@@ -16,6 +16,3 @@ class LorentzMap:
             counts.append(x[i] if x[i] == 1 else x[i]+self.n_tot)
         counts = [(x, y) for x in counts for y in counts]
         for i in counts: self.map[i] += 1
-
-
-

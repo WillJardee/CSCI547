@@ -28,33 +28,11 @@ def tree_to_code(tree, feature_names):
 
     recurse(0, 1)
 
-    def tree_to_code(tree, feature_names):
-        tree_ = tree.tree_
-        feature_name = [
-            feature_names[i] if i != Tree._tree.TREE_UNDEFINED else "undefined!"
-            for i in tree_.feature
-        ]
-        feature_names = [f.replace(" ", "_")[:-5] for f in feature_names]
-        print("def predict({}):".format(", ".join(feature_names)))
-
-        def recurse(node, depth):
-            indent = "    " * depth
-            if tree_.feature[node] != Tree._tree.TREE_UNDEFINED:
-                name = feature_name[node]
-                threshold = tree_.threshold[node]
-                print("{}if {} <= {}:".format(indent, name, np.round(threshold, 2)))
-                recurse(tree_.children_left[node], depth + 1)
-                print("{}else:  # if {} > {}".format(indent, name, np.round(threshold, 2)))
-                recurse(tree_.children_right[node], depth + 1)
-            else:
-                print("{}return {}".format(indent, tree_.value[node]))
-
-        recurse(0, 1)
-
 
 def tree_to_code2(tree):
     tree_ = tree.tree_
     print('start')
+
     def recurse(node):
         if tree_.feature[node] != Tree._tree.TREE_UNDEFINED:
             for i in (lefts := recurse(tree_.children_left[node])):
