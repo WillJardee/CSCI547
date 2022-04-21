@@ -20,5 +20,6 @@ class LorentzMap:
         counts = [(x, y) for x in counts for y in counts]
         for i in counts: self.map[i] += 1
 
-    def eigs(self, cut):
+    def eigs(self):
         w, v = np.linalg.eig(self.map)
+        print("end")
