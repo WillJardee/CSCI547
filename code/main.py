@@ -1,6 +1,7 @@
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import OneHotEncoder
 from sklearn import tree as Tree
+import RuleExtractor
 import numpy as np
 import TreeRuleExtractor as tRule
 
@@ -36,3 +37,8 @@ if __name__ == '__main__':
         arr = np.append(arr, [temp])
         vector.append(arr)
     print(vector)
+
+    ruleMap = RuleExtractor.LorentzMap(21,4)
+    print(ruleMap.get_n_pars())
+    print(vector[0])
+    ruleMap.add_term(vector[0])
