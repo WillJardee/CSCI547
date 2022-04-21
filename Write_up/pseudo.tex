@@ -1,0 +1,56 @@
+ \documentclass[11pt]{article}
+
+\usepackage[english]{babel}
+\usepackage[margin=1in]{geometry}
+
+% Math/Greek packages
+\usepackage{amssymb,amsmath,amsthm, mathtools} 
+\usepackage{algorithm, algpseudocode}
+\usepackage{upgreek, siunitx}
+\usepackage{setspace}
+
+% Graphics/Presentation packages
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{cancel}
+\usepackage{tabulary, enumitem, array}
+\usepackage{xparse,mleftright,tikz}
+\usepackage{physics}
+
+
+\begin{document}
+\begin{algorithm}
+\caption{An algorithm with caption}\label{alg:cap}
+\begin{algorithmic}
+\State {\sl rf } $\gets$ RandomForestGeneration		\Comment{extracting all the forest info}
+\State {\sl all\_rules} $\gets [\, ]$
+\For{tree, $t$, in {\sl rf}}
+	\State {\sl tree\_rules}  $\gets [\,]$
+	\For{{\sl path} in $t$}
+		\State {\sl tree\_rules} $\gets$ {\sl tree\_rules} $+$ {\sl path} 
+	\EndFor
+	\State {\sl all\_rules} $\gets$ {\sl all\_rules} + {\sl tree\_rules}
+\EndFor
+
+\State
+
+\State $n \, \gets$ number of features and classes $\times \, 2$ 
+\State {\sl Map} $\gets \, 0_{n \times n}, $
+\For{{\sl rule} in {\sl all\_rules}}
+	\If{feature $i$ and feature $j$ in {\sl rule}}
+		\State {\sl Map}$_{ij} \, \gets$  {\sl Map}$_{ij} + 1$
+		\State {\sl Map}$_{ji} \, \gets$  {\sl Map}$_{ji} + 1$
+	\EndIf
+\EndFor
+\State \Comment{The relational matrix is made now}
+\State 
+\State {\sl rule\_vecs} $\gets\{\text{Extract Principle Components/Communities as vecs}\}$
+\State {\sl final\_rules} $\gets$ $\{\}$
+\For {\sl rule} in {\sl rule\_vecs}
+	\State {\sl final\_rules} $\gets$ {\sl final\_rules} $+$ \textbf{rule\_creation}({\sl  rule})
+\EndFor
+\State \Return {\sl final\_rules}
+\end{algorithmic}
+\end{algorithm}
+
+\end{document}
