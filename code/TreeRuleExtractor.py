@@ -8,7 +8,6 @@ import numpy as np
 
 def tree_to_code2(tree):
     tree_ = tree.tree_
-    print('start')
 
     def recurse(node):
         if tree_.feature[node] != Tree._tree.TREE_UNDEFINED:
@@ -21,7 +20,6 @@ def tree_to_code2(tree):
             return [[tree_.value[node]]]
 
     rec = recurse(0)
-    print('done')
     return rec
 
 
