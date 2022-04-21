@@ -24,7 +24,7 @@ if __name__ == '__main__':
     # for r in rules:
     #     print(r)
     rule = tRule.tree_to_code2(rf[0])
-    arr = np.zeros(21)
+    arr = -1*np.ones(21)
     for i in rule[0][:-1]:
         arr[i[0]-1] = i[1]
 
