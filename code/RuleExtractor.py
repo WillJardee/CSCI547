@@ -22,4 +22,14 @@ class LorentzMap:
 
     def eigs(self):
         w, v = np.linalg.eig(self.map)
-        print("end")
+
+        def vecy(eig):
+            normed = lambda x: x / np.linalg.norm(x)
+            xp, cp = np.abs(normed(eig[:-4])), np.abs(normed(eig[-4:]))
+            return np.concatenate(([1 if i >= 1 / xp.size ** (1 / 2) else 0 for i in xp],
+                                   [1 if i >= 1 / cp.size ** (1 / 2) else 0 for i in cp]))
+
+        dic = {w[i] ** (1 / 2): vecy(v[i]) for i in range(w.size)}
+        rule_lis = [dic[x] for x in list(reversed(sorted(dic)))]
+        print("end eigen build")
+        return rule_lis
