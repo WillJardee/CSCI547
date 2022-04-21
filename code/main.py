@@ -11,7 +11,7 @@ def build_dataset(dataset):
     enc = OneHotEncoder(handle_unknown='ignore')
     x_hot = enc.fit_transform(X)
     ency = OneHotEncoder(handle_unknown='ignore')
-    ency.fit(['unacc', 'acc', 'good', 'vgood'])
+    ency.fit(np.array(['unacc', 'acc', 'good', 'vgood']).reshape(1,-1))
 
     rf = RandomForestClassifier(n_estimators=100, random_state=42)
     return rf.fit(x_hot, y), ency
