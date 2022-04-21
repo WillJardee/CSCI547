@@ -12,14 +12,14 @@ def build_dataset(dataset):
     enc = OneHotEncoder(handle_unknown='ignore')
     x_hot = enc.fit_transform(X)
     ency = OneHotEncoder(handle_unknown='ignore')
-    ency.fit(np.array(['unacc', 'acc', 'good', 'vgood']).reshape(1,-1))
+    ency.fit(np.array(np.unique(y)).reshape(1,-1))
 
     rf = RandomForestClassifier(n_estimators=100, random_state=42)
-    return rf.fit(x_hot, y), ency
+    return rf.fit(x_hot, y), ency, np.unique(y)
 
 
 if __name__ == '__main__':
-    rf, ency = build_dataset('car')
+    rf, ency, classes = build_dataset('car')
     # tRule.tree_to_code(rf[0], [str(i) + "." for i in list(range(27))])
     # rules = tRule.get_rules(rf[0], [str(i) for i in list(range(27))], ['unacc', 'acc', 'good', 'vgood'])
     # for r in rules:
@@ -40,7 +40,7 @@ if __name__ == '__main__':
             arr = np.append(arr, [temp])
             vector.append(arr)
 
-    ruleMap = RuleExtractor.LorentzMap(21, 4)
+    ruleMap = RuleExtractor.LorentzMap(21, classes.shape[0])
 
     for each_vector in range(len(vector)):
         ruleMap.add_term(vector[each_vector])
