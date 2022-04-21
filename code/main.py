@@ -23,12 +23,15 @@ if __name__ == '__main__':
     # rules = tRule.get_rules(rf[0], [str(i) for i in list(range(27))], ['unacc', 'acc', 'good', 'vgood'])
     # for r in rules:
     #     print(r)
-    rule = tRule.tree_to_code2(rf[50])
+    rule = tRule.tree_to_code2(rf[0])
     arr = np.zeros(21)
-    print(rule[10])
-    for i in rule[10][:-1]:
+    for i in rule[0][:-1]:
         arr[i[0]-1] = i[1]
+
+    temp = rule[0][-1]
+    for i in range(len(temp[0])):
+        if temp[0][i] != 0:
+            temp[0][i] = 1
+    arr = np.append(arr, [temp])
     print(arr)
-    print(rf[50].predict([arr]))
-    arr = np.concatenate((arr, ency.transform(rf[50].predict([arr]).reshape(1, -1))))
-    print(arr)
+    print(arr.shape)
