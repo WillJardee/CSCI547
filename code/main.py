@@ -38,9 +38,11 @@ if __name__ == '__main__':
                 temp[0][i] = -1
         arr = np.append(arr, [temp])
         vector.append(arr)
-    print(vector)
 
     ruleMap = RuleExtractor.LorentzMap(21, 4)
-    print(ruleMap.get_n_pars())
-    print(vector[0])
-    ruleMap.add_term(vector[0])
+
+    for each_rule in range(len(vector)):
+        print(vector[each_rule])
+        ruleMap.add_term(vector[each_rule])
+
+    print("end")
