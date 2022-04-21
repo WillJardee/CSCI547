@@ -24,14 +24,15 @@ if __name__ == '__main__':
     # for r in rules:
     #     print(r)
     rule = tRule.tree_to_code2(rf[0])
-    arr = -1*np.ones(21)
-    for i in rule[0][:-1]:
-        arr[i[0]-1] = i[1]
-
-    temp = rule[0][-1]
-    for i in range(len(temp[0])):
-        if temp[0][i] != 0:
-            temp[0][i] = 1
-    arr = np.append(arr, [temp])
-    print(arr)
-    print(arr.shape)
+    vector = []
+    for number in range(len(rule)):
+        arr = -1*np.ones(21)
+        for i in rule[number][:-1]:
+            arr[i[0]-1] = i[1]
+        temp = rule[number][-1]
+        for i in range(len(temp[0])):
+            if temp[0][i] != 0:
+                temp[0][i] = 1
+        arr = np.append(arr, [temp])
+        vector.append(arr)
+    print(vector)
