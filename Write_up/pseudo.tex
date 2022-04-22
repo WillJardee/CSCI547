@@ -1,7 +1,7 @@
- \documentclass[11pt]{article}
+ \documentclass[12pt]{article}
 
 \usepackage[english]{babel}
-\usepackage[margin=1in]{geometry}
+%\usepackage[margin=1in]{geometry}
 
 % Math/Greek packages
 \usepackage{amssymb,amsmath,amsthm, mathtools} 
@@ -19,37 +19,75 @@
 
 
 \begin{document}
+%\begin{algorithm}
+%\caption{An algorithm with caption}\label{alg:cap}
+%\begin{algorithmic}
+%\State {\sl rf } $\gets$ RandomForestGeneration		\Comment{extracting all the forest info}
+%\State {\sl allRules} $\gets [\, ]$
+%\For{tree, $t$, in {\sl rf}}
+%	\State {\sl tree\_rules}  $\gets [\,]$
+%	\For{{\sl path} in $t$}
+%		\State {\sl tree\_rules} $\gets$ {\sl tree\_rules} $+$ {\sl path} 
+%	\EndFor
+%	\State {\sl all\_rules} $\gets$ {\sl all\_rules} + {\sl tree\_rules}
+%\EndFor
+%
+%\State
+%
+%\State $n \, \gets$ number of features and classes $\times \, 2$ 
+%\State {\sl Map} $\gets \, 0_{n \times n}, $
+%\For{{\sl rule} in {\sl all\_rules}}
+%	\If{feature $i$ and feature $j$ in {\sl rule}}
+%		\State {\sl Map}$_{ij} \, \gets$  {\sl Map}$_{ij} + 1$
+%		\State {\sl Map}$_{ji} \, \gets$  {\sl Map}$_{ji} + 1$
+%	\EndIf
+%\EndFor
+%\State \Comment{The relational matrix is made now}
+%\State 
+%\State {\sl rule\_vecs} $\gets\{\text{Extract Principle Components/Communities as vecs}\}$
+%\State {\sl final\_rules} $\gets$ $\{\}$
+%\For {\sl rule} in {\sl rule\_vecs}
+%	\State {\sl final\_rules} $\gets$ {\sl final\_rules} $+$ \textbf{rule\_creation}({\sl  rule})
+%\EndFor
+%\State \Return {\sl final\_rules}
+%\end{algorithmic}
+%\end{algorithm}
+
 \begin{algorithm}
-\caption{An algorithm with caption}\label{alg:cap}
+\caption{RFRE (\textit{Random Forest Rule Extraction})}\label{alg:RFRE}
 \begin{algorithmic}
-\State {\sl rf } $\gets$ RandomForestGeneration		\Comment{extracting all the forest info}
-\State {\sl all\_rules} $\gets [\, ]$
-\For{tree, $t$, in {\sl rf}}
-	\State {\sl tree\_rules}  $\gets [\,]$
-	\For{{\sl path} in $t$}
-		\State {\sl tree\_rules} $\gets$ {\sl tree\_rules} $+$ {\sl path} 
+\State \# {\sl Creating random forest rule-set}
+\State {\sl rf } $\gets$ RandomForestGeneration		
+\State {\sl extractedRules} $\gets [\, ]$
+\For{$t$ \textbf{in} {\sl rf}}
+	\State {\sl treeRules}  $\gets [\,]$
+	\For{{\sl rule} \textbf{in} $t$}
+		\State {\sl treeRules} $\gets$ {\sl treeRules} $+$ {\sl rule} 
 	\EndFor
-	\State {\sl all\_rules} $\gets$ {\sl all\_rules} + {\sl tree\_rules}
+	\State {\sl extractedRules} $\gets$ {\sl extractedRules} + {\sl treeRules}
 \EndFor
 
 \State
-
-\State $n \, \gets$ number of features and classes $\times \, 2$ 
-\State {\sl Map} $\gets \, 0_{n \times n}, $
-\For{{\sl rule} in {\sl all\_rules}}
+\State \# {\sl Creating co-variance matrix for the rule-set}
+\State $n \, \gets$ $($number of features $\times \, 2) \, + \,($number of classes$)$ 
+\State {\sl Map} $\gets \, n\times n$ matrix of zeros
+\For{{\sl rule} in {\sl extractedRules}}
 	\If{feature $i$ and feature $j$ in {\sl rule}}
 		\State {\sl Map}$_{ij} \, \gets$  {\sl Map}$_{ij} + 1$
 		\State {\sl Map}$_{ji} \, \gets$  {\sl Map}$_{ji} + 1$
 	\EndIf
 \EndFor
-\State \Comment{The relational matrix is made now}
 \State 
-\State {\sl rule\_vecs} $\gets\{\text{Extract Principle Components/Communities as vecs}\}$
-\State {\sl final\_rules} $\gets$ $\{\}$
-\For {\sl rule} in {\sl rule\_vecs}
-	\State {\sl final\_rules} $\gets$ {\sl final\_rules} $+$ \textbf{rule\_creation}({\sl  rule})
+\State \# {\sl Rule extraction from co-variance matrix}
+\State $w, \, v$ $\gets$ Eigenvalues of {\sl Map}, Eigenvectors of {\sl Map }
+\State {\sl finalRules} $\gets$ $\{\}$
+\For{{\sl vec} in $v$}
+	\State newRule $\gets $ \textbf{rule\_creation}({\sl  vec})
+	\If{newRule meets add criteria}
+	\State {\sl finalRules} $\gets$ {\sl finalRules} $+$ newRule
+	\EndIf
 \EndFor
-\State \Return {\sl final\_rules}
+\State \Return {\sl finalRules}
 \end{algorithmic}
 \end{algorithm}
 

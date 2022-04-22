@@ -7,33 +7,31 @@ import TreeRuleExtractor as tRule
 
 
 class Dataset:
-    def __init__(self, dataset):
-        dat = np.genfromtxt("../datasets/" + dataset + "/data.csv", delimiter=",", dtype=str)
+    def __init__(self, data_name):
+        self.y, self.X, self.features, self.classes = None, None, None, None
+        self.xenc, self.x_hot, self.yenc = None, None, None
+        self.forest = None
+
+        self.get_dat(data_name)
+        self.hot_encoding()
+        self.build_forest()
+
+    def get_dat(self, data_name):
+        dat = np.genfromtxt("../datasets/" + data_name + "/data.csv", delimiter=",", dtype=str)
         self.X, self.y = dat[:, 0:-1], dat[:, -1]
+        file1 = open('../datasets/car/data_names.csv', 'r')
+        self.features = [x.split(',')[0] for x in file1.read().split("\n")[:-2]]
+        self.classes = np.unique(self.y)
+
+    def hot_encoding(self):
         self.xenc = OneHotEncoder(handle_unknown='ignore')
         self.x_hot = self.xenc.fit_transform(self.X)
-        self.yenc= OneHotEncoder(handle_unknown='ignore')
+        self.yenc = OneHotEncoder(handle_unknown='ignore')
         self.yenc.fit(np.array(np.unique(self.y)).reshape(1, -1))
-        self.classes = np.unique(self.y)
-        self.forest = None
-        self.build_forest()
 
     def build_forest(self):
         f_classifier = RandomForestClassifier(n_estimators=100, random_state=42)
         self.forest = f_classifier.fit(self.x_hot, self.y)
-
-
-
-# def build_dataset(dataset):
-#     dat = np.genfromtxt("../datasets/" + dataset + "/data.csv", delimiter=",", dtype=str)
-#     X, y = dat[:, 0:-1], dat[:, -1]
-#     enc = OneHotEncoder(handle_unknown='ignore')
-#     x_hot = enc.fit_transform(X)
-#     ency = OneHotEncoder(handle_unknown='ignore')
-#     ency.fit(np.array(np.unique(y)).reshape(1,-1))
-#
-#     rf = RandomForestClassifier(n_estimators=100, random_state=42)
-#     return rf.fit(x_hot, y), ency, np.unique(y)
 
 
 if __name__ == '__main__':
@@ -65,5 +63,5 @@ if __name__ == '__main__':
         ruleMap.add_term(vector[each_vector])
 
     print("end map gen")
-    for i in ruleMap.eigs(): print(i)
+    rules = ruleMap.eigs()
     print("end all")
