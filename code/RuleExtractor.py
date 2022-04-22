@@ -42,6 +42,7 @@ class RuleClass:
                 temp = temp + str(j) + " "
         self.rule.append(temp)
 
+
 class LorentzMap:
     def __init__(self, num_pars, num_classes):
         self.n_pars = num_pars
@@ -60,16 +61,36 @@ class LorentzMap:
         counts = [(x, y) for x in counts for y in counts]
         for i in counts: self.map[i] += 1
 
-
-
-    def eigs(self):
+    def eigs(self, k=0):
         w, v = np.linalg.eig(self.map)
 
         def vecy(eig):
-            xp, cp = np.abs(normed(eig[:-4])), np.abs(normed(eig[-4:]))
-            return np.concatenate(([1 if i >= 1.5*np.mean(xp) else 0 for i in xp],
-                                   [1 if i >= 1 / cp.size ** (1 / 2) else 0 for i in cp]))
+            xp, cp = np.abs(normed(eig[:-1 * self.n_class])), np.abs(normed(eig[-1 * self.n_class:]))
+            return np.concatenate(([1 if i >= 1.5 * np.mean(xp) else 0 for i in xp],
+                                   normed([i if i >= 1 / cp.size ** (1 / 2) else 0 for i in cp]) ** 2))
 
-        w = normed(w**2)
+        w = normed(w ** 2)
         dic = {w[i]: vecy(v[i]) for i in range(w.size)}
-        return [(x, dic[x]) for x in list(reversed(sorted(dic)))]
+        rules = [(x, dic[x]) for x in list(reversed(sorted(dic)))]
+
+        picked_rules =[]
+        class_check = np.zeros(self.n_class)
+        for i in range(k):
+            picked_rules.append(rules[i])
+            class_check += rules[i][1][-1*self.n_class:]
+        missing = []
+        for i in range(self.n_class):
+            if class_check[i] == 0:
+                missing.append(i)
+        while len(missing) != 0:
+            i = missing[0]
+            for j in rules[k+1:]:
+                if bool(j[1][-1*(self.n_class-i)]):
+                    picked_rules.append(j)
+                    for a in range(self.n_class):
+                        if bool(j[1][-1*(self.n_class -a)]):
+                            if a in missing:
+                                missing.remove(a)
+                    break
+
+        return picked_rules
