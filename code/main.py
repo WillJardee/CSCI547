@@ -20,7 +20,7 @@ class Dataset:
         dat = np.genfromtxt("../datasets/" + data_name + "/data.csv", delimiter=",", dtype=str)
         self.X, self.y = dat[:, 0:-1], dat[:, -1]
         file1 = open('../datasets/car/data_names.csv', 'r')
-        self.features = [x.split(',')[0] for x in file1.read().split("\n")[:-2]]
+        self.features = [x.split(',')[0] for x in file1.read().split("\n")[:-1]]
         self.classes = np.unique(self.y)
 
     def hot_encoding(self):
@@ -60,4 +60,7 @@ if __name__ == '__main__':
 
     print("end map gen")
     rules = ruleMap.eigs()
+    readableRule = RuleExtractor.RuleClass(dataset)
+    readableRule.findRule(rules)
+
     print("end all")

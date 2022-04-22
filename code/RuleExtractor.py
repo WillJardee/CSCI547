@@ -3,6 +3,45 @@ import numpy as np
 
 def normed(x): return x / np.linalg.norm(x)
 
+class RuleClass:
+    def __init__(self, dataset):
+        self.dataset = dataset
+        self.positive = []
+        self.negative = []
+        self.classes = []
+        self.rule = []
+
+    def findRule(self, rules):
+        for ruleNumber in range(len(rules)):
+            self.positive.append(self.dataset.xenc.inverse_transform(np.array(rules[ruleNumber][1][:21]).reshape(1,-1))[0])
+            self.negative.append(self.dataset.xenc.inverse_transform(np.array(rules[ruleNumber][1][21:42]).reshape(1,-1))[0])
+            self.classes.append(self.dataset.yenc.inverse_transform(np.array(rules[ruleNumber][1][-4:]).reshape(1,-1))[0])
+            self.writeRule(ruleNumber)
+        print(self.rule)
+
+    def writeRule(self, ruleNumber):
+        temp = ""
+        for i in range(len(self.positive[ruleNumber])):
+            if (self.positive[ruleNumber][i] != None):
+                if(self.negative[ruleNumber][i] == self.positive[ruleNumber][i]):
+                    continue
+                if (len(temp) != 0):
+                    temp = temp + "and "
+                temp = temp + "("+ str(self.dataset.features[i])+ "="+ str(self.positive[0][i])+ ") "
+            if (self.negative[ruleNumber][i] != None):
+                if(len(temp)!= 0):
+                    temp = temp + "and "
+                temp = temp +  "-" + "("+ str(self.dataset.features[i])+ "="+ str(self.negative[0][i])+ ") "
+
+        temp = temp + " --> "
+        tempLength = len(temp)
+        for j in self.classes[ruleNumber]:
+            if(j != None):
+                if(len(temp) != tempLength):
+                    temp = temp + "or "
+                temp = temp + str(j) + " "
+        self.rule.append(temp)
+
 class LorentzMap:
     def __init__(self, num_pars, num_classes):
         self.n_pars = num_pars
