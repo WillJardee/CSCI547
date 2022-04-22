@@ -29,6 +29,4 @@ class LorentzMap:
                                    [1 if i >= 1 / cp.size ** (1 / 2) else 0 for i in cp]))
 
         dic = {w[i] ** (1 / 2): vecy(v[i]) for i in range(w.size)}
-        rule_lis = [dic[x] for x in list(reversed(sorted(dic)))]
-        print("end eigen build")
-        return rule_lis
+        return [dic[x] for x in list(reversed(sorted(dic)))]

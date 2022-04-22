@@ -37,10 +37,6 @@ class Dataset:
 if __name__ == '__main__':
     dataset = Dataset('car')
     rf, ency, classes = dataset.forest, dataset.yenc, dataset.classes
-    # tRule.tree_to_code(rf[0], [str(i) + "." for i in list(range(27))])
-    # rules = tRule.get_rules(rf[0], [str(i) for i in list(range(27))], ['unacc', 'acc', 'good', 'vgood'])
-    # for r in rules:
-    #     print(r)
     vector = []
     for each_tree in range(len(rf)):
         rule = tRule.tree_to_code2(rf[each_tree])
