@@ -27,11 +27,11 @@ class RuleClass:
                     continue
                 if (len(temp) != 0):
                     temp = temp + "and "
-                temp = temp + "("+ str(self.dataset.features[i])+ "="+ str(self.positive[0][i])+ ") "
+                temp = temp + "("+ str(self.dataset.features[i])+ "="+ str(self.positive[ruleNumber][i])+ ") "
             if (self.negative[ruleNumber][i] != None):
                 if(len(temp)!= 0):
                     temp = temp + "and "
-                temp = temp +  "-" + "("+ str(self.dataset.features[i])+ "="+ str(self.negative[0][i])+ ") "
+                temp = temp +  "-" + "("+ str(self.dataset.features[i])+ "="+ str(self.negative[ruleNumber][i])+ ") "
 
         temp = temp + " --> "
         tempLength = len(temp)
