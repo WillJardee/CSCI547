@@ -1,6 +1,8 @@
 import numpy as np
 
 
+def normed(x): return x / np.linalg.norm(x)
+
 class LorentzMap:
     def __init__(self, num_pars, num_classes):
         self.n_pars = num_pars
@@ -19,14 +21,16 @@ class LorentzMap:
         counts = [(x, y) for x in counts for y in counts]
         for i in counts: self.map[i] += 1
 
+
+
     def eigs(self):
         w, v = np.linalg.eig(self.map)
 
         def vecy(eig):
-            normed = lambda x: x / np.linalg.norm(x)
             xp, cp = np.abs(normed(eig[:-4])), np.abs(normed(eig[-4:]))
-            return np.concatenate(([1 if i >= 1 / xp.size ** (1 / 2) else 0 for i in xp],
+            return np.concatenate(([1 if i >= 1.5*np.mean(xp) else 0 for i in xp],
                                    [1 if i >= 1 / cp.size ** (1 / 2) else 0 for i in cp]))
 
-        dic = {w[i] ** (1 / 2): vecy(v[i]) for i in range(w.size)}
-        return [dic[x] for x in list(reversed(sorted(dic)))]
+        w = normed(w**2)
+        dic = {w[i]: vecy(v[i]) for i in range(w.size)}
+        return [(x, dic[x]) for x in list(reversed(sorted(dic)))]
