@@ -14,6 +14,7 @@ class Dataset:
             None, None, None, None, None, None, None, None
         self.xenc, self.x_hot, self.yenc = None, None, None
         self.forest = None
+        self.encodeNumber = 0
 
         self.get_dat(data_name)
         self.hot_encoding()
@@ -21,14 +22,9 @@ class Dataset:
 
     def get_dat(self, data_name):
         dat = np.genfromtxt("../datasets/" + data_name + "/data.csv", delimiter=",", dtype=str)
-        print(len(dat))
-
         self.X, self.y = dat[:, 0:-1], dat[:, -1]
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y, test_size= 0.3, shuffle=True)
-
-        print(len(self.X_train))
-        print(len(self.y_train))
-        file1 = open('../datasets/car/data_names.csv', 'r')
+        file1 = open('../datasets/' + data_name + '/data_names.csv', 'r')
         self.features = [x.split(',')[0] for x in file1.read().split("\n")[:-1]]
         self.n_feats = len(self.features)
         self.classes = np.unique(self.y)
@@ -36,23 +32,25 @@ class Dataset:
 
     def hot_encoding(self):
         self.xenc = OneHotEncoder(handle_unknown='ignore')
-        self.x_hot = self.xenc.fit_transform(self.X_train)
+        self.x_hot = self.xenc.fit(self.X).transform(self.X_train)
         self.yenc = OneHotEncoder(handle_unknown='ignore')
+        for categories in self.xenc.categories_:
+            self.encodeNumber += len(categories)
         self.yenc.fit(np.array(np.unique(self.y_train)).reshape(1, -1))
 
     def build_forest(self):
-        f_classifier = RandomForestClassifier(n_estimators=1000, random_state=42)
+        f_classifier = RandomForestClassifier(n_estimators=100, random_state=42)
         self.forest = f_classifier.fit(self.x_hot, self.y_train)
 
 
 if __name__ == '__main__':
-    dataset = Dataset('car')
+    dataset = Dataset('tic-tac-toe')
     rf, ency, classes = dataset.forest, dataset.yenc, dataset.classes
     vector = []
     for each_tree in range(len(rf)):
         rule = tRule.tree_to_code2(rf[each_tree])
         for each_rule in range(len(rule)):
-            arr = -1*np.ones(21)
+            arr = -1*np.ones(dataset.encodeNumber)
             for i in rule[each_rule][:-1]:
                 arr[i[0]-1] = i[1]
             temp = rule[each_rule][-1]
@@ -64,7 +62,7 @@ if __name__ == '__main__':
             arr = np.append(arr, [temp])
             vector.append(arr)
 
-    ruleMap = RuleExtractor.LorentzMap(21, classes.shape[0])
+    ruleMap = RuleExtractor.LorentzMap(dataset.encodeNumber, classes.shape[0])
 
     for each_vector in range(len(vector)):
         ruleMap.add_term(vector[each_vector])

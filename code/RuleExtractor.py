@@ -20,16 +20,16 @@ class RuleClass:
         self.n_rules = len(rules)
         for ruleNumber in range(self.n_rules):
             self.positive.append(
-                self.dataset.xenc.inverse_transform(np.array(rules[ruleNumber][1][:21]).reshape(1, -1))[0])
+                self.dataset.xenc.inverse_transform(np.array(rules[ruleNumber][1][:self.dataset.encodeNumber]).reshape(1, -1))[0])
             self.negative.append(
-                self.dataset.xenc.inverse_transform(np.array(rules[ruleNumber][1][21:42]).reshape(1, -1))[0])
+                self.dataset.xenc.inverse_transform(np.array(rules[ruleNumber][1][self.dataset.encodeNumber:self.dataset.encodeNumber*2]).reshape(1, -1))[0])
             self.classes.append(
-                self.dataset.yenc.inverse_transform(np.array(rules[ruleNumber][1][-4:]).reshape(1, -1))[0])
+                self.dataset.yenc.inverse_transform(np.array(rules[ruleNumber][1][-self.dataset.n_classes:]).reshape(1, -1))[0])
             self.writeRule(ruleNumber)
 
-            self.raw_rules_pos.append(rules[ruleNumber][1][:21])
-            self.raw_rules_neg.append(rules[ruleNumber][1][21:42])
-            self.raw_class.append(rules[ruleNumber][1][-4:])
+            self.raw_rules_pos.append(rules[ruleNumber][1][:self.dataset.encodeNumber])
+            self.raw_rules_neg.append(rules[ruleNumber][1][self.dataset.encodeNumber:self.dataset.encodeNumber*2])
+            self.raw_class.append(rules[ruleNumber][1][-self.dataset.n_classes:])
 
     def writeRule(self, ruleNumber):
         temp = ""
@@ -66,7 +66,7 @@ class RuleClass:
         lambs, match = [], []
         for i in range(self.n_rules):
             pos_dot = sum(normed(x_hot) * normed(self.raw_rules_pos[i]))
-            neg_dot = sum(normed(np.ones(21) - x_hot) * normed(self.raw_rules_neg[i])) / (len(x) - 1)
+            neg_dot = sum(normed(np.ones(self.dataset.encodeNumber) - x_hot) * normed(self.raw_rules_neg[i])) / (len(x) - 1)
             lambs.append((pos_dot + neg_dot) / (1 + 1/(len(x) - 1)))
             match.append(1 if y in self.classes[i] else -1)
         measure = []
