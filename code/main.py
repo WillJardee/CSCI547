@@ -5,6 +5,7 @@ from sklearn import tree as Tree
 import RuleExtractor
 import numpy as np
 import TreeRuleExtractor as tRule
+import matplotlib.pyplot as plt
 
 
 class Dataset:
@@ -36,12 +37,13 @@ class Dataset:
 
     def hot_encoding(self):
         self.xenc = OneHotEncoder(handle_unknown='ignore')
-        self.x_hot = self.xenc.fit_transform(self.X_train)
+        self.xenc.fit(self.X)
+        self.x_hot = self.xenc.transform(self.X_train)
         self.yenc = OneHotEncoder(handle_unknown='ignore')
         self.yenc.fit(np.array(np.unique(self.y_train)).reshape(1, -1))
 
     def build_forest(self):
-        f_classifier = RandomForestClassifier(n_estimators=1000, random_state=42)
+        f_classifier = RandomForestClassifier(n_estimators=100, random_state=42)
         self.forest = f_classifier.fit(self.x_hot, self.y_train)
 
 
@@ -73,6 +75,9 @@ if __name__ == '__main__':
     rules = ruleMap.gen_rules()
     readableRule = RuleExtractor.RuleClass(dataset)
     readableRule.findRule(rules)
+
+    for i in readableRule.rule: print(i)
+
     trainResult = []
     for index in range(len(dataset.X_train)):
         trainResult.append(readableRule.rule_check(dataset.X_train[index], dataset.y_train[index]))
@@ -82,5 +87,10 @@ if __name__ == '__main__':
     for index in range(len(dataset.X_test)):
         testResult.append(readableRule.rule_check(dataset.X_test[index], dataset.y_test[index]))
     print(testResult)
+
+    plt.boxplot([trainResult, testResult], labels=['train', 'test'], vert=False)
+    # plt.boxplot(testResult, labels=['test'])
+    plt.legend()
+    plt.show()
 
     print("end all")
