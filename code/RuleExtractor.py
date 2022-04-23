@@ -7,13 +7,18 @@ def normed(x): return x / np.linalg.norm(x)
 class RuleClass:
     def __init__(self, dataset):
         self.dataset = dataset
+        self.raw_rules_pos = []
+        self.raw_rules_neg = []
+        self.raw_class = []
         self.positive = []
         self.negative = []
         self.classes = []
         self.rule = []
+        self.n_rules = None
 
     def findRule(self, rules):
-        for ruleNumber in range(len(rules)):
+        self.n_rules = len(rules)
+        for ruleNumber in range(self.n_rules):
             self.positive.append(
                 self.dataset.xenc.inverse_transform(np.array(rules[ruleNumber][1][:21]).reshape(1, -1))[0])
             self.negative.append(
@@ -21,6 +26,10 @@ class RuleClass:
             self.classes.append(
                 self.dataset.yenc.inverse_transform(np.array(rules[ruleNumber][1][-4:]).reshape(1, -1))[0])
             self.writeRule(ruleNumber)
+
+            self.raw_rules_pos.append(rules[ruleNumber][1][:21])
+            self.raw_rules_neg.append(rules[ruleNumber][1][21:42])
+            self.raw_class.append(rules[ruleNumber][1][-4:])
         print(self.rule)
 
     def writeRule(self, ruleNumber):
@@ -45,6 +54,23 @@ class RuleClass:
                     temp = temp + "or "
                 temp = temp + str(j) + " "
         self.rule.append(temp)
+
+    def rule_check(self, x, y, weight_fun=lambda x: x):
+
+        x_hot = self.dataset.xenc.transform(np.array(x).reshape([1, -1])).toarray()[0]
+        lambs, match = [], []
+        for i in range(self.n_rules):
+            pos_dot = sum(normed(x_hot) * normed(self.raw_rules_pos[i]))
+            neg_dot = sum(normed(np.ones(21) - x_hot) * normed(self.raw_rules_neg[i])) / (len(x) - 1)
+            lambs.append((pos_dot + neg_dot) / (1 + len(x) - 1))
+            match.append(1 if y in self.classes[i] else -1)
+        measure = []
+        tot_weight = []
+        for i in range(self.n_rules):
+            measure.append(weight_fun(lambs[i]) * (match[i]))
+            tot_weight.append(weight_fun(lambs[i]))
+        meas = sum(measure) / sum(tot_weight)
+        return meas
 
 
 class LorentzMap:
@@ -72,7 +98,8 @@ class LorentzMap:
 
         def vecy(eig):
             xp, cp = np.abs(normed(eig[:-1 * self.n_class])), np.abs(normed(eig[-1 * self.n_class:]))
-            return np.concatenate(([1 if i >= 1.5 * np.mean(xp) else 0 for i in xp],
+            fir_quar = sorted(xp)[int(len(xp)*.75)]
+            return np.concatenate(([1 if i >= fir_quar else 0 for i in xp],
                                    normed([i if i >= 1 / cp.size ** (1 / 2) else 0 for i in cp]) ** 2))
 
         w = normed(w ** 2)
