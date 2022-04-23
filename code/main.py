@@ -8,6 +8,7 @@ import TreeRuleExtractor as tRule
 
 class Dataset:
     def __init__(self, data_name):
+        self.n_feats, self.n_classes = None, None
         self.y, self.X, self.features, self.classes = None, None, None, None
         self.xenc, self.x_hot, self.yenc = None, None, None
         self.forest = None
@@ -21,7 +22,9 @@ class Dataset:
         self.X, self.y = dat[:, 0:-1], dat[:, -1]
         file1 = open('../datasets/car/data_names.csv', 'r')
         self.features = [x.split(',')[0] for x in file1.read().split("\n")[:-1]]
+        self.n_feats = len(self.features)
         self.classes = np.unique(self.y)
+        self.n_classes = len(self.classes)
 
     def hot_encoding(self):
         self.xenc = OneHotEncoder(handle_unknown='ignore')
@@ -62,5 +65,6 @@ if __name__ == '__main__':
     rules = ruleMap.eigs()
     readableRule = RuleExtractor.RuleClass(dataset)
     readableRule.findRule(rules)
+    print(val := readableRule.rule_check(dataset.X[0], dataset.y[0]))
 
     print("end all")
