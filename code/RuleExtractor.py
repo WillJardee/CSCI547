@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def normed(x): return x / np.linalg.norm(x)
+def normed(x): return x / sum([y**2 for y in x])**(1/2)
 
 
 class RuleClass:
@@ -54,7 +54,7 @@ class RuleClass:
                 temp = temp + str(j) + " "
         self.rule.append(temp)
 
-    def rule_check(self, x, y, weight_fun=lambda x: x):
+    def rule_check(self, x, y, weight_fun=lambda x: np.exp(x)):
         """
 
         :param (list) x: Input vector (NOT one hot-encoded)
@@ -66,8 +66,8 @@ class RuleClass:
         lambs, match = [], []
         for i in range(self.n_rules):
             pos_dot = sum(normed(x_hot) * normed(self.raw_rules_pos[i]))
-            neg_dot = sum(normed(np.ones(self.dataset.encodeNumber) - x_hot) * normed(self.raw_rules_neg[i])) / (len(x) - 1)
-            lambs.append((pos_dot + neg_dot) / (1 + 1/(len(x) - 1)))
+            neg_dot = sum((np.ones(21) - x_hot)/(sum([x**2 for x in x_hot])**(1/2)) * normed(self.raw_rules_neg[i])) / (len(x) - 1)
+            lambs.append(pos_dot + neg_dot)
             match.append(1 if y in self.classes[i] else -1)
         measure = []
         tot_weight = []
@@ -105,7 +105,7 @@ class LorentzMap:
         counts = [(x, y) for x in counts for y in counts]
         for i in counts: self.map[i] += 1
 
-    def gen_rules(self, k=None,
+    def gen_rules(self, k=None, kstar=1,
                   x_fun=lambda i, x: i >= sorted(x)[int(len(x)*.75)],
                   y_fun=lambda i, x: i >= 1/x.size**(1/2)):
         """
@@ -118,13 +118,13 @@ class LorentzMap:
         """
 
         if k is None:
-            k = 5
+            k = 10
         w, v = np.linalg.eig(self.map)
 
         def vecy(eig):
             xp, cp = np.abs(normed(eig[:-1 * self.n_class])), np.abs(normed(eig[-1 * self.n_class:]))
             return np.concatenate(([1 if x_fun(i, xp) else 0 for i in xp],
-                                   normed([i if y_fun(i, xp) else 0 for i in cp]) ** 2))
+                                   normed([i if y_fun(i, cp) else 0 for i in cp]) ** 2))
 
         w = normed(w ** 2)
         dic = {w[i]: vecy(v[i]) for i in range(w.size)}
@@ -134,20 +134,23 @@ class LorentzMap:
         class_check = np.zeros(self.n_class)
         for i in range(k):
             picked_rules.append(rules[i])
-            class_check += rules[i][1][-1 * self.n_class:]
+            class_check += [1 if x > 0 else 0 for x in rules[i][1][-1 * self.n_class:]]
         missing = []
         for i in range(self.n_class):
-            if class_check[i] == 0:
-                missing.append(i)
+            if class_check[i] < kstar:
+                missing.append([i]*int(kstar-class_check[i]))
         while len(missing) != 0:
-            i = missing[0]
+            i = missing[0][0]
             for j in rules[k + 1:]:
                 if bool(j[1][-1 * (self.n_class - i)]):
                     picked_rules.append(j)
                     for a in range(self.n_class):
                         if bool(j[1][-1 * (self.n_class - a)]):
-                            if a in missing:
-                                missing.remove(a)
+                            for b in missing:
+                                if b[0] == a:
+                                    b.pop(0)
+                                    if not b:
+                                        missing.remove([])
                     break
 
         return picked_rules

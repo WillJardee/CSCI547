@@ -5,6 +5,7 @@ from sklearn import tree as Tree
 import RuleExtractor
 import numpy as np
 import TreeRuleExtractor as tRule
+import matplotlib.pyplot as plt
 
 
 class Dataset:
@@ -14,7 +15,6 @@ class Dataset:
             None, None, None, None, None, None, None, None
         self.xenc, self.x_hot, self.yenc = None, None, None
         self.forest = None
-        self.encodeNumber = 0
 
         self.get_dat(data_name)
         self.hot_encoding()
@@ -44,7 +44,7 @@ class Dataset:
 
 
 if __name__ == '__main__':
-    dataset = Dataset('tic-tac-toe')
+    dataset = Dataset('car')
     rf, ency, classes = dataset.forest, dataset.yenc, dataset.classes
     vector = []
     for each_tree in range(len(rf)):
@@ -71,6 +71,9 @@ if __name__ == '__main__':
     rules = ruleMap.gen_rules()
     readableRule = RuleExtractor.RuleClass(dataset)
     readableRule.findRule(rules)
+
+    for i in readableRule.rule: print(i)
+
     trainResult = []
     for index in range(len(dataset.X_train)):
         trainResult.append(readableRule.rule_check(dataset.X_train[index], dataset.y_train[index]))
@@ -80,5 +83,10 @@ if __name__ == '__main__':
     for index in range(len(dataset.X_test)):
         testResult.append(readableRule.rule_check(dataset.X_test[index], dataset.y_test[index]))
     print(testResult)
+
+    plt.boxplot([trainResult, testResult], labels=['train', 'test'], vert=False)
+    # plt.boxplot(testResult, labels=['test'])
+    plt.legend()
+    plt.show()
 
     print("end all")
