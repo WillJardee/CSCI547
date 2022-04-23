@@ -72,6 +72,14 @@ if __name__ == '__main__':
     rules = ruleMap.eigs()
     readableRule = RuleExtractor.RuleClass(dataset)
     readableRule.findRule(rules)
-    print(val := readableRule.rule_check(dataset.X[0], dataset.y[0]))
+    trainResult = []
+    for index in range(len(dataset.X_train)):
+        trainResult.append(readableRule.rule_check(dataset.X_train[index], dataset.y_train[index]))
+    print(trainResult)
+
+    testResult = []
+    for index in range(len(dataset.X_test)):
+        testResult.append(readableRule.rule_check(dataset.X_test[index], dataset.y_test[index]))
+    print(testResult)
 
     print("end all")
