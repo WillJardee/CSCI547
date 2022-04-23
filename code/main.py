@@ -10,7 +10,8 @@ import TreeRuleExtractor as tRule
 class Dataset:
     def __init__(self, data_name):
         self.n_feats, self.n_classes = None, None
-        self.X_train, self.y_train, self.X_test, self.y_test, self.y, self.X, self.features, self.classes = None, None, None, None, None, None, None, None
+        self.X_train, self.y_train, self.X_test, self.y_test, self.y, self.X, self.features, self.classes = \
+            None, None, None, None, None, None, None, None
         self.xenc, self.x_hot, self.yenc = None, None, None
         self.forest = None
 
@@ -40,7 +41,7 @@ class Dataset:
         self.yenc.fit(np.array(np.unique(self.y_train)).reshape(1, -1))
 
     def build_forest(self):
-        f_classifier = RandomForestClassifier(n_estimators=100, random_state=42)
+        f_classifier = RandomForestClassifier(n_estimators=1000, random_state=42)
         self.forest = f_classifier.fit(self.x_hot, self.y_train)
 
 
@@ -69,7 +70,7 @@ if __name__ == '__main__':
         ruleMap.add_term(vector[each_vector])
 
     print("end map gen")
-    rules = ruleMap.eigs()
+    rules = ruleMap.gen_rules()
     readableRule = RuleExtractor.RuleClass(dataset)
     readableRule.findRule(rules)
     trainResult = []

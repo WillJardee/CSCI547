@@ -30,7 +30,6 @@ class RuleClass:
             self.raw_rules_pos.append(rules[ruleNumber][1][:21])
             self.raw_rules_neg.append(rules[ruleNumber][1][21:42])
             self.raw_class.append(rules[ruleNumber][1][-4:])
-        print(self.rule)
 
     def writeRule(self, ruleNumber):
         temp = ""
@@ -56,13 +55,19 @@ class RuleClass:
         self.rule.append(temp)
 
     def rule_check(self, x, y, weight_fun=lambda x: x):
+        """
 
+        :param (list) x: Input vector (NOT one hot-encoded)
+        :param (str) y: Class
+        :param (function) weight_fun:
+        :return:
+        """
         x_hot = self.dataset.xenc.transform(np.array(x).reshape([1, -1])).toarray()[0]
         lambs, match = [], []
         for i in range(self.n_rules):
             pos_dot = sum(normed(x_hot) * normed(self.raw_rules_pos[i]))
             neg_dot = sum(normed(np.ones(21) - x_hot) * normed(self.raw_rules_neg[i])) / (len(x) - 1)
-            lambs.append((pos_dot + neg_dot) / (1 + len(x) - 1))
+            lambs.append((pos_dot + neg_dot) / (1 + 1/(len(x) - 1)))
             match.append(1 if y in self.classes[i] else -1)
         measure = []
         tot_weight = []
@@ -81,6 +86,13 @@ class LorentzMap:
         self.map = np.zeros((self.n_tot, self.n_tot))
 
     def add_term(self, x):
+        """
+        Adds a term to teh covariance matrix of the forest.
+
+        :param x: rule vector to be added to the covariance matrix
+        :return: None
+        """
+
         counts = []
         for i in range(len(x) - self.n_class):
             if x[i] == -1:
@@ -93,14 +105,26 @@ class LorentzMap:
         counts = [(x, y) for x in counts for y in counts]
         for i in counts: self.map[i] += 1
 
-    def eigs(self, k=7):
+    def gen_rules(self, k=None,
+                  x_fun=lambda i, x: i >= sorted(x)[int(len(x)*.75)],
+                  y_fun=lambda i, x: i >= 1/x.size**(1/2)):
+        """
+        Generates the k* most important rules of the dataset
+
+        :param (int) k: number of rules to extract. Default: number of features
+        :param (function) x_fun: cut criteria for normalized input. Default: 1st quartile
+        :param (function) y_fun: cut criteria for normalized class. Default: 1/sqrt(num of classes) - better than random
+        :return: list of first k rules and any additional rules needed to fully cover the space.
+        """
+
+        if k is None:
+            k = 5
         w, v = np.linalg.eig(self.map)
 
         def vecy(eig):
             xp, cp = np.abs(normed(eig[:-1 * self.n_class])), np.abs(normed(eig[-1 * self.n_class:]))
-            fir_quar = sorted(xp)[int(len(xp)*.75)]
-            return np.concatenate(([1 if i >= fir_quar else 0 for i in xp],
-                                   normed([i if i >= 1 / cp.size ** (1 / 2) else 0 for i in cp]) ** 2))
+            return np.concatenate(([1 if x_fun(i, xp) else 0 for i in xp],
+                                   normed([i if y_fun(i, xp) else 0 for i in cp]) ** 2))
 
         w = normed(w ** 2)
         dic = {w[i]: vecy(v[i]) for i in range(w.size)}
