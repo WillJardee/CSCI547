@@ -118,7 +118,7 @@ class LorentzMap:
         """
 
         if k is None:
-            k = 10
+            k = 5
         w, v = np.linalg.eig(self.map)
 
         def vecy(eig):
