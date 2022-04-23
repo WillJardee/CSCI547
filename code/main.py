@@ -16,6 +16,7 @@ class Dataset:
         self.xenc, self.x_hot, self.yenc = None, None, None
         self.forest = None
         self.encodeNumber = 0
+
         self.get_dat(data_name)
         self.hot_encoding()
         self.build_forest()
@@ -23,7 +24,7 @@ class Dataset:
     def get_dat(self, data_name):
         dat = np.genfromtxt("../datasets/" + data_name + "/data.csv", delimiter=",", dtype=str)
         self.X, self.y = dat[:, 0:-1], dat[:, -1]
-        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y, test_size= 0.3, shuffle=True)
+        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y, test_size= 0.3, shuffle=False)
         file1 = open('../datasets/' + data_name + '/data_names.csv', 'r')
         self.features = [x.split(',')[0] for x in file1.read().split("\n")[:-1]]
         self.n_feats = len(self.features)
@@ -39,7 +40,7 @@ class Dataset:
         self.yenc.fit(np.array(np.unique(self.y_train)).reshape(1, -1))
 
     def build_forest(self):
-        f_classifier = RandomForestClassifier(n_estimators=1000, random_state=42)
+        f_classifier = RandomForestClassifier(n_estimators=500, random_state=42)
         self.forest = f_classifier.fit(self.x_hot, self.y_train)
 
 
@@ -90,4 +91,4 @@ if __name__ == '__main__':
         plt.legend()
         plt.show()
 
-        print("end all")
+    print("end all")

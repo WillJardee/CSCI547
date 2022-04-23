@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def normed(x): return x / sum([y**2 for y in x])**(1/2)
+def normed(x): return x / (l) if (l := sum([y ** 2 for y in x]) ** (1 / 2)) else np.zeros(len(x))
 
 
 class RuleClass:
@@ -20,15 +20,20 @@ class RuleClass:
         self.n_rules = len(rules)
         for ruleNumber in range(self.n_rules):
             self.positive.append(
-                self.dataset.xenc.inverse_transform(np.array(rules[ruleNumber][1][:self.dataset.encodeNumber]).reshape(1, -1))[0])
+                self.dataset.xenc.inverse_transform(
+                    np.array(rules[ruleNumber][1][:self.dataset.encodeNumber]).reshape(1, -1))[0])
             self.negative.append(
-                self.dataset.xenc.inverse_transform(np.array(rules[ruleNumber][1][self.dataset.encodeNumber:self.dataset.encodeNumber*2]).reshape(1, -1))[0])
+                self.dataset.xenc.inverse_transform(
+                    np.array(rules[ruleNumber][1][self.dataset.encodeNumber:self.dataset.encodeNumber * 2]).reshape(1,
+                                                                                                                    -1))[
+                    0])
             self.classes.append(
-                self.dataset.yenc.inverse_transform(np.array(rules[ruleNumber][1][-self.dataset.n_classes:]).reshape(1, -1))[0])
+                self.dataset.yenc.inverse_transform(
+                    np.array(rules[ruleNumber][1][-self.dataset.n_classes:]).reshape(1, -1))[0])
             self.writeRule(ruleNumber)
 
             self.raw_rules_pos.append(rules[ruleNumber][1][:self.dataset.encodeNumber])
-            self.raw_rules_neg.append(rules[ruleNumber][1][self.dataset.encodeNumber:self.dataset.encodeNumber*2])
+            self.raw_rules_neg.append(rules[ruleNumber][1][self.dataset.encodeNumber:self.dataset.encodeNumber * 2])
             self.raw_class.append(rules[ruleNumber][1][-self.dataset.n_classes:])
 
     def writeRule(self, ruleNumber):
@@ -66,7 +71,9 @@ class RuleClass:
         lambs, match = [], []
         for i in range(self.n_rules):
             pos_dot = sum(normed(x_hot) * normed(self.raw_rules_pos[i]))
-            neg_dot = sum((np.ones(self.dataset.encodeNumber) - x_hot)/(sum([x**2 for x in x_hot])**(1/2)) * normed(self.raw_rules_neg[i])) / (len(x) - 1)
+            neg_dot = sum(
+                (np.ones(self.dataset.encodeNumber) - x_hot) / (sum([x ** 2 for x in x_hot]) ** (1 / 2)) * normed(
+                    self.raw_rules_neg[i])) / (len(x) - 1)
             lambs.append(pos_dot + neg_dot)
             match.append(1 if y in self.classes[i] else -1)
         measure = []
@@ -105,9 +112,9 @@ class LorentzMap:
         counts = [(x, y) for x in counts for y in counts]
         for i in counts: self.map[i] += 1
 
-    def gen_rules(self, k=None, kstar=1,
-                  x_fun=lambda i, x: i >= sorted(x)[int(len(x)*.75)],
-                  y_fun=lambda i, x: i >= 1/x.size**(1/2)):
+    def gen_rules(self, k=None, kstar=None,
+                  x_fun=lambda i, x: i >= sorted(x)[int(len(x) * .75)],
+                  y_fun=lambda i, x: i >= 1 / x.size ** (1 / 2)):
         """
         Generates the k* most important rules of the dataset
 
@@ -118,7 +125,10 @@ class LorentzMap:
         """
 
         if k is None:
-            k = 5
+            k = 11
+        if kstar is None:
+            kstar = 1
+
         w, v = np.linalg.eig(self.map)
 
         def vecy(eig):
@@ -138,7 +148,7 @@ class LorentzMap:
         missing = []
         for i in range(self.n_class):
             if class_check[i] < kstar:
-                missing.append([i]*int(kstar-class_check[i]))
+                missing.append([i] * int(kstar - class_check[i]))
         while len(missing) != 0:
             i = missing[0][0]
             for j in rules[k + 1:]:
