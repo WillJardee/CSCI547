@@ -65,12 +65,12 @@ def run_test(dat_s, k_val, kstar_val, f_size_val, runs=15, save=True, plot=False
                 arr = np.append(arr, [temp])
                 vector.append(arr)
 
-        ruleMap = RuleExtractor.LorentzMap(dataset.encodeNumber, classes.shape[0])
+        rule_map = RuleExtractor.LorentzMap(dataset.encodeNumber, classes.shape[0])
 
         for each_vector in range(len(vector)):
-            ruleMap.add_term(vector[each_vector])
+            rule_map.add_term(vector[each_vector])
 
-        rules = ruleMap.gen_rules(k=k_val, kstar=kstar_val)
+        rules = rule_map.gen_rules(k=k_val, kstar=kstar_val)
         readable_rule = RuleExtractor.RuleClass(dataset)
         readable_rule.findRule(rules)
 
@@ -116,11 +116,17 @@ def run_test(dat_s, k_val, kstar_val, f_size_val, runs=15, save=True, plot=False
             for j in readable_rule.rule: fil_hum.write(j + "\n")
             for j in range(len(readable_rule.rule)): fil_raw.write(str(readable_rule.raw_rules_pos[j]) +
                                                                    str(readable_rule.raw_rules_neg[j]) +
+
                                                                    str(readable_rule.raw_class[j]) + "\n")
+            fil_train_met.write(str(dataset.forest.score(dataset.xenc.transform(dataset.X_train), dataset.y_train))
+                                + "\n")
             fil_train_met.write("linear:\n")
             fil_train_met.write(str(train_result_lin) + "\n")
             fil_train_met.write("\nexponential:\n")
             fil_train_met.write(str(train_result_exp) + "\n")
+
+            fil_test_met.write(str(dataset.forest.score(dataset.xenc.transform(dataset.X_test), dataset.y_test))
+                                + "\n")
             fil_test_met.write("linear:\n")
             fil_test_met.write(str(test_result_lin) + "\n")
             fil_test_met.write("\nexponential:\n")
@@ -141,6 +147,7 @@ if __name__ == '__main__':
     k = [0, 2, 6, 10, 20]
     kstar = [0, 1, 2, 3]
     f_size = [20, 50, 100, 200, 500, 1000, 2000, 5000]
+
     tests = [(x, y, z) for x in k for y in kstar for z in f_size]
     for i in f_size:
         tests.remove((0, 0, i))
