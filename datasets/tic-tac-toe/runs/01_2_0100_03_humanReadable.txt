@@ -1,0 +1,5 @@
+1,2,100
+(tl=x) and (tr=b) and (mm=b) and -(mm=x) and -(mr=x) and (bl=b) and -(bl=o) and (bm=o) and (br=x) and -(br=o)  --> negative 
+-(tl=b) and (tm=b) and (ml=b) and (mm=b) and (mr=b) and (bl=o) and (bm=o) and (br=b)  --> negative 
+-(tl=b) and (ml=x) and (mm=x) and (mr=o) and (bm=b) and -(bm=o) and -(br=b)  --> positive 
+-(tl=b) and (ml=x) and (mm=x) and (mr=o) and (bm=b) and -(bm=o) and -(br=b)  --> positive 

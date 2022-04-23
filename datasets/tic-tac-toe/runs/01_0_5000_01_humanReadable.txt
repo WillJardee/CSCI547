@@ -1,0 +1,2 @@
+1,0,5000
+(tm=o) and -(tm=b) and (ml=x) and -(mr=b) and (bm=o) and (br=x)  --> positive 

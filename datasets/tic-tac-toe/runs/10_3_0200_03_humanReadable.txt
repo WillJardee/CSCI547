@@ -1,0 +1,11 @@
+10,3,200
+(tl=b) and -(tl=o) and (tm=b) and -(tm=x) and (ml=o) and -(ml=b) and (mr=x) and (bl=o) and -(bl=b) and (br=b)  --> negative 
+-(tm=b) and (tr=o) and -(tr=b) and (bl=o) and -(bl=b) and (bm=o) and (br=b)  --> negative 
+-(tl=b) and (tm=o) and (ml=x) and (mm=o) and (mr=b) and (bl=b) and (bm=b) and -(bm=o) and (br=o)  --> positive 
+-(tl=b) and -(mm=o) and -(bl=o) and -(bm=o) and (br=o) and -(br=x)  --> negative 
+(tm=o) and (tr=x) and (ml=o) and (mm=b) and (mr=b) and (bl=o) and (bm=x)  --> positive 
+(tl=x) and (tm=x) and -(tr=o) and -(mr=o) and (bl=o) and -(bl=b) and -(bm=b)  --> positive 
+(ml=x) and -(mm=o) and -(mr=b) and (bl=o) and -(bl=b) and (bm=b)  --> negative 
+-(tl=b) and -(tr=b) and (ml=x) and (mm=x) and -(mm=b) and (mr=b) and -(mr=x) and (bl=b) and -(bl=x) and -(bm=b) and -(br=b)  --> negative 
+(tm=o) and (tr=x) and (ml=o) and (mm=b) and -(mm=o) and (mr=b) and (bl=b) and (bm=b) and (br=b)  --> negative 
+-(tl=b) and (ml=x) and (mm=o) and -(mm=b) and (mr=b) and (bl=b) and (bm=b) and (br=b) and -(br=o)  --> positive 
