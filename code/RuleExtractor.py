@@ -125,7 +125,7 @@ class LorentzMap:
         """
 
         if k is None:
-            k = 5
+            k = 15
         if kstar is None:
             kstar = 1
 
