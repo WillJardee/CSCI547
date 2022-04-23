@@ -59,7 +59,7 @@ class RuleClass:
                 temp = temp + str(j) + " "
         self.rule.append(temp)
 
-    def rule_check(self, x, y, weight_fun=lambda x: np.exp(x)):
+    def rule_check(self, x, y, weight_fun=lambda x: x):
         """
 
         :param (list) x: Input vector (NOT one hot-encoded)
