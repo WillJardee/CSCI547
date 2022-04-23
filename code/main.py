@@ -1,5 +1,6 @@
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import OneHotEncoder
+from sklearn.model_selection import train_test_split
 from sklearn import tree as Tree
 import RuleExtractor
 import numpy as np
@@ -9,7 +10,7 @@ import TreeRuleExtractor as tRule
 class Dataset:
     def __init__(self, data_name):
         self.n_feats, self.n_classes = None, None
-        self.y, self.X, self.features, self.classes = None, None, None, None
+        self.X_train, self.y_train, self.X_test, self.y_test, self.y, self.X, self.features, self.classes = None, None, None, None, None, None, None, None
         self.xenc, self.x_hot, self.yenc = None, None, None
         self.forest = None
 
@@ -19,7 +20,13 @@ class Dataset:
 
     def get_dat(self, data_name):
         dat = np.genfromtxt("../datasets/" + data_name + "/data.csv", delimiter=",", dtype=str)
+        print(len(dat))
+
         self.X, self.y = dat[:, 0:-1], dat[:, -1]
+        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y, test_size= 0.3, shuffle=True)
+
+        print(len(self.X_train))
+        print(len(self.y_train))
         file1 = open('../datasets/car/data_names.csv', 'r')
         self.features = [x.split(',')[0] for x in file1.read().split("\n")[:-1]]
         self.n_feats = len(self.features)
@@ -28,13 +35,13 @@ class Dataset:
 
     def hot_encoding(self):
         self.xenc = OneHotEncoder(handle_unknown='ignore')
-        self.x_hot = self.xenc.fit_transform(self.X)
+        self.x_hot = self.xenc.fit_transform(self.X_train)
         self.yenc = OneHotEncoder(handle_unknown='ignore')
-        self.yenc.fit(np.array(np.unique(self.y)).reshape(1, -1))
+        self.yenc.fit(np.array(np.unique(self.y_train)).reshape(1, -1))
 
     def build_forest(self):
         f_classifier = RandomForestClassifier(n_estimators=100, random_state=42)
-        self.forest = f_classifier.fit(self.x_hot, self.y)
+        self.forest = f_classifier.fit(self.x_hot, self.y_train)
 
 
 if __name__ == '__main__':
