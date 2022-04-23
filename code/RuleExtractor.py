@@ -66,7 +66,7 @@ class RuleClass:
         lambs, match = [], []
         for i in range(self.n_rules):
             pos_dot = sum(normed(x_hot) * normed(self.raw_rules_pos[i]))
-            neg_dot = sum((np.ones(21) - x_hot)/(sum([x**2 for x in x_hot])**(1/2)) * normed(self.raw_rules_neg[i])) / (len(x) - 1)
+            neg_dot = sum((np.ones(self.dataset.encodeNumber) - x_hot)/(sum([x**2 for x in x_hot])**(1/2)) * normed(self.raw_rules_neg[i])) / (len(x) - 1)
             lambs.append(pos_dot + neg_dot)
             match.append(1 if y in self.classes[i] else -1)
         measure = []
