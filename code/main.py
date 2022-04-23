@@ -24,7 +24,7 @@ class Dataset:
     def get_dat(self, data_name):
         dat = np.genfromtxt("../datasets/" + data_name + "/data.csv", delimiter=",", dtype=str)
         self.X, self.y = dat[:, 0:-1], dat[:, -1]
-        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y, test_size= 0.3, shuffle=False)
+        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y, test_size= 0.3, shuffle=True)
         file1 = open('../datasets/' + data_name + '/data_names.csv', 'r')
         self.features = [x.split(',')[0] for x in file1.read().split("\n")[:-1]]
         self.n_feats = len(self.features)
@@ -46,7 +46,7 @@ class Dataset:
 
 if __name__ == '__main__':
     for numberofTest in range(15):
-        dataset = Dataset('tic-tac-toe')
+        dataset = Dataset('breast_cancer_wisconsin')
         rf, ency, classes = dataset.forest, dataset.yenc, dataset.classes
         vector = []
         for each_tree in range(len(rf)):
