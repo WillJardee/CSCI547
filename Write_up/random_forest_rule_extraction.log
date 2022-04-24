@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.8) (preloaded format=pdflatex 2021.10.25)  23 APR 2022 17:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.8) (preloaded format=pdflatex 2021.10.25)  23 APR 2022 19:29
 entering extended mode
 **./random_forest_rule_extraction.tex
 (random_forest_rule_extraction.tex
@@ -667,7 +667,7 @@ LaTeX Font Info:    ... okay on input line 49.
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: twoside 
-* h-part:(L,W,R)=(73.71613pt, 430.00462pt, 110.57425pt)
+* h-part:(L,W,R)=(92.14519pt, 430.00462pt, 92.14519pt)
 * v-part:(T,H,B)=(95.39737pt, 556.47656pt, 143.09605pt)
 * \paperwidth=614.295pt
 * \paperheight=794.96999pt
@@ -773,27 +773,27 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 [1{C:/Users/jarde/AppData/Local/MiKTeX/pdftex/config/pdftex.map}
 
-]
+] [2]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 115.
-
-(random_forest_rule_extraction.bbl
+put line 145.
+ [3]
+[4] (random_forest_rule_extraction.bbl
 
 Package natbib Warning: Empty `thebibliography' environment on input line 8.
 
-) [2] [3] (random_forest_rule_extraction.aux)
+) [5] (random_forest_rule_extraction.aux)
 Package rerunfilecheck Info: File `random_forest_rule_extraction.out' has not c
 hanged.
-(rerunfilecheck)             Checksum: F5E0FE3862838BA6B5F007600AC466A6;3374.
+(rerunfilecheck)             Checksum: 57EBAE4E9C25F72ADF473DA5DD5B0DF7;2982.
  ) 
 Here is how much of TeX's memory you used:
  21566 strings out of 478927
- 405584 string characters out of 2852534
- 721608 words of memory out of 3000000
- 39056 multiletter control sequences out of 15000+600000
+ 405560 string characters out of 2852534
+ 721544 words of memory out of 3000000
+ 39054 multiletter control sequences out of 15000+600000
  412412 words of font info for 59 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,16n,81p,739b,752s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 75i,16n,81p,825b,766s stack positions out of 5000i,500n,10000p,200000b,80000s
 <C:/Users/jarde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
 cmbx10.pfb><C:/Users/jarde/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
 fonts/cm/cmbx12.pfb><C:/Users/jarde/AppData/Local/Programs/MiKTeX/fonts/type1/p
@@ -806,10 +806,11 @@ rograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/jarde/AppData
 s/jarde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsl10.pfb
 ><C:/Users/jarde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/c
 msy10.pfb><C:/Users/jarde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsf
-onts/cm/cmti10.pfb>
-Output written on random_forest_rule_extraction.pdf (3 pages, 170306 bytes).
+onts/cm/cmsy8.pfb><C:/Users/jarde/AppData/Local/Programs/MiKTeX/fonts/type1/pub
+lic/amsfonts/cm/cmti10.pfb>
+Output written on random_forest_rule_extraction.pdf (5 pages, 192914 bytes).
 PDF statistics:
- 198 PDF objects out of 1000 (max. 8388607)
- 57 named destinations out of 1000 (max. 500000)
- 153 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 206 PDF objects out of 1000 (max. 8388607)
+ 59 named destinations out of 1000 (max. 500000)
+ 137 words of extra memory for PDF output out of 10000 (max. 10000000)
 
