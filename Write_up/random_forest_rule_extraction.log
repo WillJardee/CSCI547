@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.8) (preloaded format=pdflatex 2021.10.25)  23 APR 2022 19:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.8) (preloaded format=pdflatex 2021.10.25)  23 APR 2022 20:19
 entering extended mode
 **./random_forest_rule_extraction.tex
 (random_forest_rule_extraction.tex
@@ -6,8 +6,8 @@ LaTeX2e <2021-06-01> patch level 1
 L3 programming layer <2021-08-27>
 (C:\Users\jarde\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
 Document Class: article 2021/02/12 v1.4n Standard LaTeX document class
-(C:\Users\jarde\AppData\Local\Programs\MiKTeX\tex/latex/base\size11.clo
-File: size11.clo 2021/02/12 v1.4n Standard LaTeX file (size option)
+(C:\Users\jarde\AppData\Local\Programs\MiKTeX\tex/latex/base\size10.clo
+File: size10.clo 2021/02/12 v1.4n Standard LaTeX file (size option)
 )
 \c@part=\count182
 \c@section=\count183
@@ -678,12 +678,12 @@ LaTeX Font Info:    ... okay on input line 49.
 * \topmargin=-36.135pt
 * \headheight=12.0pt
 * \headsep=43.06749pt
-* \topskip=11.0pt
+* \topskip=10.0pt
 * \footskip=30.0pt
 * \marginparwidth=5.05942pt
-* \marginparsep=10.0pt
+* \marginparsep=11.0pt
 * \columnsep=10.0pt
-* \skip\footins=10.0pt plus 4.0pt minus 2.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
 * \hoffset=0.0pt
 * \voffset=0.0pt
 * \mag=1000
@@ -784,33 +784,36 @@ Package natbib Warning: Empty `thebibliography' environment on input line 8.
 ) [5] (random_forest_rule_extraction.aux)
 Package rerunfilecheck Info: File `random_forest_rule_extraction.out' has not c
 hanged.
-(rerunfilecheck)             Checksum: 57EBAE4E9C25F72ADF473DA5DD5B0DF7;2982.
+(rerunfilecheck)             Checksum: A49EFEEB4394125C6D0D47A128588A3C;2982.
  ) 
 Here is how much of TeX's memory you used:
- 21566 strings out of 478927
- 405560 string characters out of 2852534
- 721544 words of memory out of 3000000
- 39054 multiletter control sequences out of 15000+600000
- 412412 words of font info for 59 fonts, out of 8000000 for 9000
+ 21561 strings out of 478927
+ 405445 string characters out of 2852534
+ 724515 words of memory out of 3000000
+ 39047 multiletter control sequences out of 15000+600000
+ 410380 words of font info for 52 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,16n,81p,825b,766s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 75i,16n,81p,924b,772s stack positions out of 5000i,500n,10000p,200000b,80000s
 <C:/Users/jarde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
 cmbx10.pfb><C:/Users/jarde/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
 fonts/cm/cmbx12.pfb><C:/Users/jarde/AppData/Local/Programs/MiKTeX/fonts/type1/p
-ublic/amsfonts/cm/cmcsc10.pfb><C:/Users/jarde/AppData/Local/Programs/MiKTeX/fon
-ts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/jarde/AppData/Local/Programs/M
-iKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/jarde/AppData/Local/P
-rograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/jarde/AppData
-/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/jarde
-/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/User
-s/jarde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsl10.pfb
-><C:/Users/jarde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/c
-msy10.pfb><C:/Users/jarde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsf
-onts/cm/cmsy8.pfb><C:/Users/jarde/AppData/Local/Programs/MiKTeX/fonts/type1/pub
-lic/amsfonts/cm/cmti10.pfb>
-Output written on random_forest_rule_extraction.pdf (5 pages, 192914 bytes).
+ublic/amsfonts/cm/cmbx9.pfb><C:/Users/jarde/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/jarde/AppData/Local/Programs/Mi
+KTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/jarde/AppData/Local/Pr
+ograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/jarde/AppData
+/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/jarde
+/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Use
+rs/jarde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb>
+<C:/Users/jarde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cm
+r9.pfb><C:/Users/jarde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfont
+s/cm/cmsl10.pfb><C:/Users/jarde/AppData/Local/Programs/MiKTeX/fonts/type1/publi
+c/amsfonts/cm/cmsy10.pfb><C:/Users/jarde/AppData/Local/Programs/MiKTeX/fonts/ty
+pe1/public/amsfonts/cm/cmsy7.pfb><C:/Users/jarde/AppData/Local/Programs/MiKTeX/
+fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/jarde/AppData/Local/Program
+s/MiKTeX/fonts/type1/public/amsfonts/cm/cmti9.pfb>
+Output written on random_forest_rule_extraction.pdf (5 pages, 229781 bytes).
 PDF statistics:
- 206 PDF objects out of 1000 (max. 8388607)
- 59 named destinations out of 1000 (max. 500000)
+ 222 PDF objects out of 1000 (max. 8388607)
+ 60 named destinations out of 1000 (max. 500000)
  137 words of extra memory for PDF output out of 10000 (max. 10000000)
 

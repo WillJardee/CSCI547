@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}
+\documentclass[10pt]{article}
 
 \usepackage{amssymb,amsmath, mathtools} 
 \usepackage{geometry, graphicx}
@@ -114,7 +114,7 @@ Given the eigen decomposition of the matrix, represented in the form of the set 
 Because the distribution of the component values is not known, sophisticated models shouldn't be used here; i.e., a standard deviation cut cannot be done because there is no guarantee the components are Gaussian. For this paper we assigned a 1st quartile cut, where only values in the top 25\% are kept. Future work should look into how to include the weights into rule expression, but we choose to set all rule values to 1 for simplicity. The feature portion of the eigenvector can be explained by the function
 \begin{equation}
 f_f(x_i)=\begin{cases}
-          1 \quad &\text{if} \, x_i > 25\% \text{ of vector} \\
+          1 \quad &\text{if} \, x_i > 75\% \text{ of vector} \\
           0 \quad &\text{Otherwise} \\
      \end{cases} \, .
 \end{equation}
@@ -193,8 +193,32 @@ Then, the time complexity of creating the rule set will be $\mathcal{O}(l! D)$, 
  
 \section{Experimentation}
 \label{sec:experiment}
-\subsection{Implementation}
 \subsection{Proposed performance metric}
+To measure the performance of a test set with the derived rule set, a new metric was developed. The motivation of this metric is that for a given input vector, $\vb{X}$, related class, $y$, the importance of rules that the $\vb{X}$ fit need to be weighted heavier than those it does not fit. The measurement of how well $\vb{X}$ matches up is done through a dot product in Cartesian space (however, there is no reason that a complicated metric/kernel could not be applied to the inner-product). To test the negative nodes, i.e. $\bar{A}$, $\vb{X}$ can be subtracted from the vector of all ones, notated as $\bar{\vb{X}}$. This gives a vector of all the values the vector is \textit{not}. The inner product of $\bar{\vb{X}}$ and $\bar{A}$, where the negative clauses have a value of 1, will represent how well the vector lines up with the negative clauses of the rule. 
+
+Since the positive examples are more specific the weighting of them should be larger. To account for this, the inner product of the negative clauses is divided by $n-1$, where $n$ is still the number of features. This value is easier to see when viewed in the context of one hot encoding, as the potential the product satisfied stochastically will be on the order of $n-1$. As this is specifically in the context of a dot product in Cartesian space, if the metric/kernel is being changed than this value should be too. 
+
+To ensure that these two products are on the same magnitude, they must be normalized before taking the inner product. By the Schwarz' Inequality, for two vectors $v$ and $u$ the inner product of the two, $< \, , \, >$, must satisfy 
+\[\langle \,u, v \, \rangle \, \leq \,  ||u|| \cdot ||v|| \, .\]
+So, if all the vectors are normalized before taking any inner products then $\langle \,\vb{X}, A \, \rangle \,\leq\, 1$ and $\langle \, \bar{\vb{X}}, \bar{A} \, \rangle \, \leq \, 1$. So, for a given rule, the weight can be calculated with 
+\[\alpha_i = \langle \,\vb{X}, A \, \rangle + \langle \, \bar{\vb{X}}, \bar{A} \, \rangle / (n-1) \, ,\]
+where $\alpha_i \in [0, 1+ 1/(n-1)]$.
+
+If the class $y$ is in the rule's conclusion, $W$, then the two can be thought of a positive example, otherwise it is a negative example;
+\begin{equation*}
+\beta_i=\begin{cases}
+          1 \quad &\text{if} \, y \in W \\
+          -1 \quad &\text{if} \, y \notin W\\
+     \end{cases} \, .
+\end{equation*}
+The total weight score of a test instance can then be quanitifed as 
+\begin{equation}
+\gamma = \frac{\sum_{i=0}^k f(\alpha_i) \cdot \beta_i}{\sum_{i=0}^k f(\alpha_i)}
+\end{equation}
+where $f(\alpha_i)$ is a given weight function. The two weight functions tested were the linear map, $f: x\mapsto x$, and the exponential map, $f: x\mapsto \exp(x)$. Because of the normalization, $\gamma \in [-1, 1]$.
+
+
+\subsection{Implementation}
 \subsection{Qualitative comparison of rules}
 \subsection{Quantitative results}
 
