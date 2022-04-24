@@ -1,0 +1,7 @@
+0,2,200
+(maint=med) and -(maint=high) and -(doors=5more) and (lug_boot=small) and (safety=low) and -(safety=med)  --> acc or unacc 
+(maint=med) and -(maint=high) and -(doors=5more) and (lug_boot=small) and (safety=low) and -(safety=med)  --> acc or unacc 
+-(buying=high) and -(maint=low) and (safety=med)  --> good or unacc 
+-(buying=high) and -(maint=low) and (safety=med)  --> good or unacc 
+-(maint=high) and -(doors=2) and -(safety=med)  --> vgood 
+-(maint=high) and -(doors=2) and -(safety=med)  --> vgood 

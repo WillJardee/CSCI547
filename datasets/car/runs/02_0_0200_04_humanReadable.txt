@@ -1,0 +1,3 @@
+2,0,200
+(buying=vhigh) and (maint=high) and -(maint=vhigh) and (doors=2) and -(doors=3) and -(lug_boot=big) and (safety=low)  --> good 
+-(buying=high) and -(maint=med) and -(doors=2) and -(lug_boot=big) and (safety=low)  --> vgood 

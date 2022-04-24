@@ -1,0 +1,9 @@
+2,3,50
+(buying=vhigh) and (maint=low) and -(maint=high) and (doors=5more) and -(doors=3) and (persons=2) and -(persons=4)  --> acc 
+-(buying=high) and -(maint=vhigh) and (doors=5more) and -(doors=4) and -(lug_boot=big) and (safety=med)  --> acc or unacc 
+-(buying=high) and -(maint=high) and -(doors=3) and (lug_boot=med) and -(safety=low)  --> acc or vgood 
+-(buying=vhigh) and (doors=5more) and -(doors=2) and (persons=2) and -(persons=4) and -(safety=low)  --> good 
+-(buying=vhigh) and (doors=5more) and -(doors=2) and (persons=2) and -(persons=4) and -(safety=low)  --> good 
+-(buying=vhigh) and (doors=5more) and -(doors=2) and (persons=2) and -(persons=4) and -(safety=low)  --> good 
+-(buying=med) and -(maint=low) and (doors=5more) and -(doors=4) and (persons=2) and -(persons=more) and (safety=med)  --> unacc or vgood 
+-(buying=med) and -(maint=low) and (doors=5more) and -(doors=4) and (persons=2) and -(persons=more) and (safety=med)  --> unacc or vgood 

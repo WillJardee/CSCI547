@@ -1,0 +1,181 @@
+\documentclass[twoside,11pt]{article}
+
+\usepackage{amssymb,amsmath, mathtools} 
+\usepackage{geometry, graphicx}
+\usepackage{algorithm, algpseudocode}
+\usepackage{tabulary}
+\usepackage{upgreek}
+\usepackage{siunitx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{csvsimple}
+\usepackage{hanging}
+\usepackage[export]{adjustbox}
+\usepackage{multirow}
+\usepackage{url}
+
+\usepackage{enumitem}
+\usepackage{physics}
+
+\usepackage{mathtools}
+
+\usepackage{soul}
+
+
+\graphicspath{ {../images} }    
+
+
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+
+\usepackage{jmlr2e}
+
+\usepackage[noabbrev,capitalize]{cleveref}
+
+
+
+% Heading arguments are {volume}{year}{pages}{submitted}{published}{author-full-names}
+
+
+% Short headings should be running head and authors' last names
+
+
+\ShortHeadings{Random Forest Rule Extraction}{Jardee and Shi}
+\firstpageno{1}
+
+
+\begin{document}
+
+
+\title{Random Forest Rule Extraction}
+
+\author{\name William Jardee\email willjardee@gmail.com \\
+       \addr Physics\\
+       Montana State University\\
+       Bozeman, MT 59715, USA\AND
+       \name Lin Shi\email linshi1768@gmail.com\\
+       \addr Computer Science\\
+       Montana State University\\
+       Bozeman, MT 59715, USA
+       }
+\editor{N/A}
+
+\maketitle
+
+\begin{abstract}%
+
+\end{abstract}
+ 
+\section{Introduction}
+\label{sec:intro}
+
+
+%---------------------------------------------------------------------
+
+\section{Related Works}
+\label{sec:related works}
+\subsection{Decision trees and random forests}
+\subsection{Tree extraction from random forest}
+\subsection{Rule representation of neural networks}
+\subsection{Eigenspaces}
+
+
+%---------------------------------------------------------------------
+
+\section{Rule Extraction from Random Forests}
+\label{sec:alg}
+\subsection{Rule sets from decision trees}
+Each path in a decision tree can be extracted as a logical rule. Consider a path in a binary decision tree that follows the path of ``$\neg A, \neg B, C$" and returns the class $W_0$. This decision can be stated as 
+\[\neg A \land \neg B \land C \rightarrow W_0 \,.\]
+Using material implication, sometimes also referred to as modus ponus, and De Morgan's law this rule can be written as 
+\[\neg\left(\neg A \land \neg B \land C\right) \lor W_0 \, , \]
+\begin{equation}
+\neg(\neg A) \lor \neg (\neg B) \lor \neg(C) \lor W_0 \, .
+\label{eq:alg1}
+\end{equation}
+Notice that we have decided to not cancel out the negations, this is will be useful for later as they will cancel out. 
+
+Each path of each tree in the random forest can be extracted as one of these rules. We propose that if the problem can be explained with high order logical rules. These rules may be embedded in these tree paths, and consequently also in these extracted rules. If two clauses show up together often, they probably come from the same logical rule. The same can be said about a clause and classification. The pattern here can be described by a co-variance matrix. 
+
+Let us construct a $(2n +c) \times (2n+c)$ matrix of all zeros, where $n$ is the number of features and $c$ is the number of classes. For simplicity, all of these features are assumed to be binary so that for each feature there are only two values, providing the $2n$ instead of just $n$. Each of the rows and columns will correspond to a possible logical decision. For the example in equation~\ref{eq:alg1} the first $2n$ rows would correspond to $[\neg(A), \neg(B), \neg(C), A, B, C]$. The last $c$ would correspond to the possible classes. Each time a pair of clauses show up together in a rule in the extracted rule $1$ will be added to the corresponding cell. 
+
+To illustrate this, see the co-variance matrix, $\Delta$, for the continuing example:
+\begin{align*}
+&\;A\:\:\:B\:\:\:C\:\:\bar{A}\:\:\bar{B}\:\:\bar{C}\:W_0\:W_1\\
+\Delta = \quad \mqty{A\\B\\C\\\bar{A}\\\bar{B}\\\bar{C}\\W_0\\W_1}\, &\mqty[\cdot&\cdot&\cdot&\cdot&\cdot&\cdot&\cdot&\cdot\\\cdot&\cdot&\cdot&\cdot&\cdot&\cdot&\cdot&\cdot\\\cdot&\cdot&1&1&1&\cdot&1&\cdot\\\cdot&\cdot&1&1&1&\cdot&1&\cdot\\\cdot&\cdot&1&1&1&\cdot&1&\cdot\\\cdot&\cdot&\cdot&\cdot&\cdot&\cdot&\cdot&\cdot\\\cdot&\cdot&1&1&1&\cdot&1&\cdot\\\cdot&\cdot&\cdot&\cdot&\cdot&\cdot&\cdot&\cdot] \, ,
+\end{align*}
+where $\bar{A} \equiv \neg A$ and zeros have been replaced with $\cdot$ for readability.
+\subsection{Co-variance matrix from rule sets}
+\subsection{Rule basis of co-variance matrix}
+\subsection{Rule pruning and class-space coverage}
+
+\begin{algorithm}[!ht]
+\caption{RFRE (\textit{Random Forest Rule Extraction})}\label{alg:RFRE}
+\begin{algorithmic}
+\State \# {\sl Creating random forest rule-set}
+\State {\sl rf } $\gets$ RandomForestGeneration		
+\State {\sl extractedRules} $\gets [\, ]$
+\For{$t$ \textbf{in} {\sl rf}}
+	\State {\sl treeRules}  $\gets [\,]$
+	\For{{\sl rule} \textbf{in} $t$}
+		\State {\sl treeRules} $\gets$ {\sl treeRules} $+$ {\sl rule} 
+	\EndFor
+	\State {\sl extractedRules} $\gets$ {\sl extractedRules} + {\sl treeRules}
+\EndFor
+
+\State
+\State \# {\sl Creating co-variance matrix for the rule-set}
+\State $n \, \gets$ $($number of features $\times \, 2) \, + \,($number of classes$)$ 
+\State {\sl Map} $\gets \, n\times n$ matrix of zeros
+\For{{\sl rule} in {\sl extractedRules}}
+	\If{feature $i$ and feature $j$ in {\sl rule}}
+		\State {\sl Map}$_{ij} \, \gets$  {\sl Map}$_{ij} + 1$
+		\State {\sl Map}$_{ji} \, \gets$  {\sl Map}$_{ji} + 1$
+	\EndIf
+\EndFor
+\State 
+\State \# {\sl Rule extraction from co-variance matrix}
+\State $w, \, v$ $\gets$ Eigenvalues of {\sl Map}, Eigenvectors of {\sl Map }
+\State {\sl finalRules} $\gets$ $\{\}$
+\For{{\sl vec} in $v$}
+	\State newRule $\gets $ \textbf{rule\_creation}({\sl  vec})
+	\If{newRule meets add criteria}
+	\State {\sl finalRules} $\gets$ {\sl finalRules} $+$ newRule
+	\EndIf
+\EndFor
+\State \Return {\sl finalRules}
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Time complexity}
+ 
+%---------------------------------------------------------------------
+ 
+\section{Experimentation}
+\label{sec:experiment}
+\subsection{Implementation}
+\subsection{Proposed performance metric}
+\subsection{Qualitative comparison of rules}
+\subsection{Quantitative results}
+
+
+%---------------------------------------------------------------------
+
+\section{Discussion}
+\label{sec:dis}
+
+
+%---------------------------------------------------------------------
+
+\section{Conclusion}
+\label{sec:conc}
+
+
+%---------------------------------------------------------------------
+
+\vskip 0.2in
+\bibliography{random_forest_rule_extraction}
+
+\end{document}

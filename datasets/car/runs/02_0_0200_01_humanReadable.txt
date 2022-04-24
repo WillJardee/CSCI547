@@ -1,0 +1,3 @@
+2,0,200
+(maint=high) and -(maint=med) and (persons=2) and -(persons=4) and (safety=low)  --> unacc 
+-(buying=low) and -(maint=med) and -(doors=2) and (safety=med)  --> good or unacc 

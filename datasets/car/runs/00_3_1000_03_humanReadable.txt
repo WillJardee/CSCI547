@@ -1,0 +1,10 @@
+0,3,1000
+-(buying=low) and (doors=4) and -(doors=2) and (persons=4) and -(persons=more) and (safety=high)  --> acc or unacc 
+-(buying=low) and (doors=4) and -(doors=2) and (persons=4) and -(persons=more) and (safety=high)  --> acc or unacc 
+-(buying=low) and (doors=4) and -(doors=2) and (persons=4) and -(persons=more) and (safety=high)  --> acc or unacc 
+-(buying=vhigh) and -(maint=high) and -(doors=5more) and (persons=more) and -(persons=4) and (safety=med)  --> good 
+-(buying=vhigh) and -(maint=high) and -(doors=5more) and (persons=more) and -(persons=4) and (safety=med)  --> good 
+-(buying=vhigh) and -(maint=high) and -(doors=5more) and (persons=more) and -(persons=4) and (safety=med)  --> good 
+-(buying=vhigh) and -(maint=high) and -(doors=4)  --> acc or vgood 
+-(buying=vhigh) and -(maint=high) and -(doors=4)  --> acc or vgood 
+-(buying=vhigh) and -(maint=high) and -(doors=4)  --> acc or vgood 

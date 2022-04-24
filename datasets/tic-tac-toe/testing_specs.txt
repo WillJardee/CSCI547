@@ -1,4 +1,4 @@
-Running on data set: car
+Running on data set: tic-tac-toe
 k values:  [0, 1, 10, 11, 22]
 k* values: [0, 1, 2, 3]
 forest sizes: [20, 50, 100, 200, 500, 1000, 2000, 5000]

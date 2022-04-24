@@ -1,0 +1,7 @@
+6,0,5000
+(buying=vhigh) and (maint=high) and (safety=high)  --> acc 
+-(buying=high) and -(maint=high) and (safety=high)  --> acc 
+-(buying=vhigh) and (maint=vhigh) and -(maint=high) and -(doors=5more) and (persons=4) and -(persons=2) and -(lug_boot=med) and (safety=high)  --> acc 
+-(buying=low) and -(maint=high) and (persons=more) and -(persons=2)  --> acc 
+-(buying=high) and (maint=vhigh) and (persons=more) and -(persons=4) and (safety=high)  --> acc 
+-(buying=high) and -(maint=high) and -(doors=3) and (persons=more) and -(persons=2) and -(lug_boot=small) and (safety=high)  --> acc 
