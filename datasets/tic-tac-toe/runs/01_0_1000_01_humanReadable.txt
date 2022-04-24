@@ -1,0 +1,2 @@
+1,0,1000
+(tl=x) and (tm=x) and -(tm=b) and (tr=b) and (ml=o) and -(mm=x) and -(mr=o) and (bl=o) and -(bl=b)  --> negative 

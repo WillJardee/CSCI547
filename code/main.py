@@ -102,8 +102,8 @@ def run_test(dat_s, k_val, kstar_val, f_size_val, runs=15, save=True, plot=False
             fil_name = str(k_val).zfill(2) + "_" + str(kstar_val) + "_" + str(f_size_val).zfill(4) + "_" + str(
                 numberTest).zfill(2)
             fil_name = '../datasets/' + dat_s + "/runs/" + fil_name + "_"
-            fil_hum = open(fil_name + "humanReadable.txt", 'w')
-            fil_raw = open(fil_name + "raw.txt", 'w')
+            fil_hum = open((fil_name + "humanReadable.txt"), 'w')
+            fil_raw = open((fil_name + "raw.txt"), 'w')
             fil_train_met = open(fil_name + "trainMetric.txt", 'w')
             fil_test_met = open(fil_name + "testMetric.txt", 'w')
 
@@ -141,10 +141,10 @@ def run_test(dat_s, k_val, kstar_val, f_size_val, runs=15, save=True, plot=False
 
 
 if __name__ == '__main__':
-    dat_set = 'car'
+    dat_set = 'tic-tac-toe'
     run = 5
 
-    k = [0, 2, 6, 10, 20]
+    k = [0, 1, 10, 11, 22]
     kstar = [0, 1, 2, 3]
     f_size = [20, 50, 100, 200, 500, 1000, 2000, 5000]
 
