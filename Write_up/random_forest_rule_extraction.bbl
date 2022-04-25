@@ -1,8 +1,13 @@
-\begin{thebibliography}{0}
+\begin{thebibliography}{1}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Strang(2006)]{strang2006linear}
+Gilbert Strang.
+\newblock \emph{Linear algebra and its applications}.
+\newblock Acad. Press, 4th edition, 2006.
 
 \end{thebibliography}

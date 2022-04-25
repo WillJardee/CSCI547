@@ -137,7 +137,7 @@ class LorentzMap:
                                    normed([i if y_fun(i, cp) else 0 for i in cp]) ** 2))
 
         w = normed(w ** 2)
-        dic = {w[i]: vecy(v[i]) for i in range(w.size)}
+        dic = {w[i]: vecy(v[i]) for i in  range(w.size)}
         rules = [(x, dic[x]) for x in list(reversed(sorted(dic)))]
 
         picked_rules = []

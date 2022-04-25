@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.8) (preloaded format=pdflatex 2021.10.25)  23 APR 2022 20:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.8) (preloaded format=pdflatex 2021.10.25)  25 APR 2022 00:19
 entering extended mode
 **./random_forest_rule_extraction.tex
 (random_forest_rule_extraction.tex
@@ -635,29 +635,29 @@ Package cleveref Info: always capitalise cross-reference names on input line 78
 52.
 )
 Package translations Info: No language package found. I am going to use `englis
-h' as default language. on input line 49.
+h' as default language. on input line 48.
 
 (random_forest_rule_extraction.aux)
 \openout1 = `random_forest_rule_extraction.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -733,11 +733,11 @@ File: translations-basic-dictionary-english.trsl (english translation file `tra
 nslations-basic-dictionary')
 )
 Package translations Info: loading dictionary `translations-basic-dictionary' f
-or `english'. on input line 49.
+or `english'. on input line 48.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring OFF on input line 49.
+Package hyperref Info: Link coloring OFF on input line 48.
 
 (C:\Users\jarde\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
@@ -751,21 +751,21 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count326
 )
-LaTeX Info: Redefining \ref on input line 49.
-LaTeX Info: Redefining \pageref on input line 49.
-LaTeX Info: Redefining \nameref on input line 49.
+LaTeX Info: Redefining \ref on input line 48.
+LaTeX Info: Redefining \pageref on input line 48.
+LaTeX Info: Redefining \nameref on input line 48.
  (random_forest_rule_extraction.out)
 (random_forest_rule_extraction.out)
 \@outlinefile=\write4
 \openout4 = `random_forest_rule_extraction.out'.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 90.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 89.
 
 
 (C:\Users\jarde\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 90.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 89.
 
 
 (C:\Users\jarde\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
@@ -775,25 +775,36 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 ] [2]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 145.
+put line 140.
  [3]
-[4] (random_forest_rule_extraction.bbl
-
-Package natbib Warning: Empty `thebibliography' environment on input line 8.
-
-) [5] (random_forest_rule_extraction.aux)
+[4] [5] [6] [7]
+<images/rules_performance_meas.png, id=218, 867.24pt x 578.16pt>
+File: images/rules_performance_meas.png Graphic file (type png)
+<use images/rules_performance_meas.png>
+Package pdftex.def Info: images/rules_performance_meas.png  used on input line 
+552.
+(pdftex.def)             Requested size: 212.47617pt x 141.64603pt.
+<images/forest_performance_meas.png, id=220, 867.24pt x 578.16pt>
+File: images/forest_performance_meas.png Graphic file (type png)
+<use images/forest_performance_meas.png>
+Package pdftex.def Info: images/forest_performance_meas.png  used on input line
+ 556.
+(pdftex.def)             Requested size: 212.47617pt x 141.64603pt.
+ [8] (random_forest_rule_extraction.bbl) [9 <./images/rules_performance_meas.pn
+g> <./images/forest_performance_meas.png>]
+(random_forest_rule_extraction.aux)
 Package rerunfilecheck Info: File `random_forest_rule_extraction.out' has not c
 hanged.
-(rerunfilecheck)             Checksum: A49EFEEB4394125C6D0D47A128588A3C;2982.
+(rerunfilecheck)             Checksum: CA65DBA9C178C22CD657EB4E485FCB6E;4285.
  ) 
 Here is how much of TeX's memory you used:
- 21561 strings out of 478927
- 405445 string characters out of 2852534
- 724515 words of memory out of 3000000
- 39047 multiletter control sequences out of 15000+600000
- 410380 words of font info for 52 fonts, out of 8000000 for 9000
+ 21675 strings out of 478927
+ 407447 string characters out of 2852534
+ 750500 words of memory out of 3000000
+ 39121 multiletter control sequences out of 15000+600000
+ 414661 words of font info for 68 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,16n,81p,924b,772s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 75i,16n,81p,1259b,856s stack positions out of 5000i,500n,10000p,200000b,80000s
 <C:/Users/jarde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
 cmbx10.pfb><C:/Users/jarde/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
 fonts/cm/cmbx12.pfb><C:/Users/jarde/AppData/Local/Programs/MiKTeX/fonts/type1/p
@@ -802,18 +813,21 @@ ublic/amsfonts/cm/cmbx9.pfb><C:/Users/jarde/AppData/Local/Programs/MiKTeX/fonts
 KTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/jarde/AppData/Local/Pr
 ograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/jarde/AppData
 /Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/jarde
-/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Use
-rs/jarde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb>
-<C:/Users/jarde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cm
-r9.pfb><C:/Users/jarde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfont
-s/cm/cmsl10.pfb><C:/Users/jarde/AppData/Local/Programs/MiKTeX/fonts/type1/publi
-c/amsfonts/cm/cmsy10.pfb><C:/Users/jarde/AppData/Local/Programs/MiKTeX/fonts/ty
-pe1/public/amsfonts/cm/cmsy7.pfb><C:/Users/jarde/AppData/Local/Programs/MiKTeX/
-fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/jarde/AppData/Local/Program
-s/MiKTeX/fonts/type1/public/amsfonts/cm/cmti9.pfb>
-Output written on random_forest_rule_extraction.pdf (5 pages, 229781 bytes).
+/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Use
+rs/jarde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb
+><C:/Users/jarde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/c
+mr7.pfb><C:/Users/jarde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
+ts/cm/cmr8.pfb><C:/Users/jarde/AppData/Local/Programs/MiKTeX/fonts/type1/public
+/amsfonts/cm/cmr9.pfb><C:/Users/jarde/AppData/Local/Programs/MiKTeX/fonts/type1
+/public/amsfonts/cm/cmsl10.pfb><C:/Users/jarde/AppData/Local/Programs/MiKTeX/fo
+nts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/jarde/AppData/Local/Programs/
+MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/jarde/AppData/Local/P
+rograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/jarde/AppData
+/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/jard
+e/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti9.pfb>
+Output written on random_forest_rule_extraction.pdf (9 pages, 396188 bytes).
 PDF statistics:
- 222 PDF objects out of 1000 (max. 8388607)
- 60 named destinations out of 1000 (max. 500000)
- 137 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 335 PDF objects out of 1000 (max. 8388607)
+ 88 named destinations out of 1000 (max. 500000)
+ 211 words of extra memory for PDF output out of 10000 (max. 10000000)
 
