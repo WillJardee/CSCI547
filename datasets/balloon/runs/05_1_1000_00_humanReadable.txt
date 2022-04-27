@@ -1,0 +1,6 @@
+5,1,1000
+-(size=SMALL)  --> F 
+-(color=PURPLE) and -(act=DIP) and (age=ADULT)  --> F 
+-(color=PURPLE) and -(size=SMALL) and -(age=ADULT)  --> F 
+-(color=YELLOW) and (act=DIP) and (age=ADULT)  --> T 
+-(act=DIP)  --> F 

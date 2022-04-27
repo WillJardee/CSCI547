@@ -1,0 +1,3 @@
+2,1,100
+-(size=LARGE) and -(act=STRETCH) and (age=ADULT)  --> F 
+-(act=STRETCH)  --> T 
