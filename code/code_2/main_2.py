@@ -70,6 +70,7 @@ class LorentzMap:
 
     def add_tree(self, t):
         for term in t:
+            if len(t) == 1: continue
             for k in range(len(t[-1][0])):
                 if t[-1][0][k] != 0:
                     self.add_term(term[:-1*self.n_class], k)
@@ -81,7 +82,7 @@ class LorentzMap:
 
 
 if __name__ == '__main__':
-    dat = Dataset('adult+stretch_readable.data', f_size_val=100)
+    dat = Dataset('adult-stretch_readable.data', f_size_val=100)
     map = LorentzMap(dat.n_feats, dat.n_classes)
     map.add_forest(dat.rules)
 

@@ -1,13 +1,100 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{15}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
+\bibitem[Andrews and Geva(1994)]{andrews1994rule}
+Robert Andrews and Shlomo Geva.
+\newblock Rule extraction from a constrained error back propagation mlp.
+\newblock In \emph{Australian Conference on Neural Networks, Brisbane,
+  Queensland}, pages 9--12, 1994.
+
+\bibitem[Andrews et~al.(1995)Andrews, Diederich, and Tickle]{andrews1995survey}
+Robert Andrews, Joachim Diederich, and Alan~B Tickle.
+\newblock Survey and critique of techniques for extracting rules from trained
+  artificial neural networks.
+\newblock \emph{Knowledge-based systems}, 8\penalty0 (6):\penalty0 373--389,
+  1995.
+
+\bibitem[Arzamasov et~al.(2021)Arzamasov, Jochum, and
+  B{\"o}hm]{arzamasov2021pedagogical}
+Vadim Arzamasov, Benjamin Jochum, and Klemens B{\"o}hm.
+\newblock Pedagogical rule extraction for learning interpretable models.
+\newblock \emph{arXiv e-prints}, pages arXiv--2112, 2021.
+
+\bibitem[B{\'e}nard et~al.(2021)B{\'e}nard, Biau, Da~Veiga, and
+  Scornet]{benard2021interpretable}
+Cl{\'e}ment B{\'e}nard, G{\'e}rard Biau, S{\'e}bastien Da~Veiga, and Erwan
+  Scornet.
+\newblock Interpretable random forests via rule extraction.
+\newblock In \emph{International Conference on Artificial Intelligence and
+  Statistics}, pages 937--945. PMLR, 2021.
+
+\bibitem[Blaser and Fryzlewicz(2016)]{blaser2016random}
+Rico Blaser and Piotr Fryzlewicz.
+\newblock Random rotation ensembles.
+\newblock \emph{The Journal of Machine Learning Research}, 17\penalty0
+  (1):\penalty0 126--151, 2016.
+
+\bibitem[Boruah et~al.(2022)Boruah, Biswas, and
+  Bandyopadhyay]{boruah2022transparent}
+Arpita~Nath Boruah, Saroj~Kumar Biswas, and Sivaji Bandyopadhyay.
+\newblock Transparent rule generator random forest (trg-rf): an interpretable
+  random forest.
+\newblock \emph{Evolving Systems}, pages 1--15, 2022.
+
+\bibitem[Breiman(2001)]{breiman2001random}
+Leo Breiman.
+\newblock Random forests.
+\newblock \emph{Machine learning}, 45\penalty0 (1):\penalty0 5--32, 2001.
+
+\bibitem[De~Fortuny and Martens(2015)]{de2015active}
+Enric~Junque De~Fortuny and David Martens.
+\newblock Active learning-based pedagogical rule extraction.
+\newblock \emph{IEEE Transactions on Neural Networks and Learning Systems},
+  26\penalty0 (11):\penalty0 2664--2677, 2015.
+
+\bibitem[Fu(1994)]{fu1994rule}
+LiMin Fu.
+\newblock Rule generation from neural networks.
+\newblock \emph{IEEE Transactions on Systems, Man, and Cybernetics},
+  24\penalty0 (8):\penalty0 1114--1124, 1994.
+
+\bibitem[Griffiths and Schroeter(2018)]{griffiths2018introduction}
+David~J Griffiths and Darrell~F Schroeter.
+\newblock \emph{Introduction to quantum mechanics}.
+\newblock Cambridge university press, 2018.
+
+\bibitem[Hruschka and Ebecken(2006)]{hruschka2006extracting}
+Eduardo~R Hruschka and Nelson~FF Ebecken.
+\newblock Extracting rules from multilayer perceptrons in classification
+  problems: A clustering-based approach.
+\newblock \emph{Neurocomputing}, 70\penalty0 (1-3):\penalty0 384--397, 2006.
+
+\bibitem[Mashayekhi and Gras(2015)]{mashayekhi2015rule}
+Morteza Mashayekhi and Robin Gras.
+\newblock Rule extraction from random forest: the rf+ hc methods.
+\newblock In \emph{Canadian Conference on Artificial Intelligence}, pages
+  223--237. Springer, 2015.
+
+\bibitem[Sch{\"o}lkopf et~al.(1997)Sch{\"o}lkopf, Smola, and
+  M{\"u}ller]{scholkopf1997kernel}
+Bernhard Sch{\"o}lkopf, Alexander Smola, and Klaus-Robert M{\"u}ller.
+\newblock Kernel principal component analysis.
+\newblock In \emph{International Conference on Artificial Neural Networks},
+  pages 583--588. Springer, 1997.
+
 \bibitem[Strang(2006)]{strang2006linear}
 Gilbert Strang.
 \newblock \emph{Linear algebra and its applications}.
 \newblock Acad. Press, 4th edition, 2006.
+
+\bibitem[Vidal and Schiffer(2020)]{vidal2020born}
+Thibaut Vidal and Maximilian Schiffer.
+\newblock Born-again tree ensembles.
+\newblock In \emph{International Conference on Machine Learning}, pages
+  9743--9753. PMLR, 2020.
 
 \end{thebibliography}
