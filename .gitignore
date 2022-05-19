@@ -1,0 +1,8 @@
+# ignore ALL of these types of files
+*.log
+*.aux
+*.synctex.gz
+*.out
+
+*.bbl
+*.blg
